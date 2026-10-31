@@ -1,0 +1,21 @@
+{
+  "name": "the-cru",
+  "version": "1.0.0",
+  "description": "Static website with GitHub Pages deployment",
+  "private": true,
+  "scripts": {
+    "dev": "live-server src --port=3000",
+    "prebuild": "rm -rf build",
+    "build": "mkdir -p build/client && cp -r src/* build/client/",
+    "postbuild": "cp build/client/index.html build/client/404.html && touch build/client/.nojekyll && [ -f CNAME ] && grep -qv '^#' CNAME 2>/dev/null && cp CNAME build/client/ || true",
+    "deploy": "gh-pages -d build/client -b gh-pages -t",
+    "ship": "npm run build && npm run deploy"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.1.1",
+    "live-server": "^1.2.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
