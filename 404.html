@@ -1,45 +1,220 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE-CRU</title>
-    <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Cru — Film, Photo &amp; Design CRU</title>
+<meta name="description" content="The Cru — a film, photo and design CRU working across documentary, outdoor adventure and branded work.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500&family=Permanent+Marker&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/main.css">
+<noscript><style>[data-reveal]{opacity:1 !important;transform:none !important;}#slate-overlay{display:none !important;}</style></noscript>
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo">THE-CRU</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <main>
-        <section id="home" class="hero">
-            <h1>Willkommen bei THE-CRU</h1>
-            <p>Diese Webseite wird mit GitHub Pages gehostet.</p>
-            <a href="#about" class="cta-button">Mehr erfahren</a>
-        </section>
+<div class="frame-bar frame-bar--top">
+  <span class="tick always"><span class="rec-dot"></span><span id="timecode">00:00:00:00</span></span>
+  <span class="tick">35MM · T2.8</span>
+  <span class="tick">25 FPS</span>
+  <span class="tick accent always">FILM / PHOTO / DESIGN CRU</span>
+</div>
+<div class="frame-bar frame-bar--bottom">
+  <span class="tick always">EXT. — DAY</span>
+  <span class="tick">SCENE 01 / 04</span>
+  <span class="tick">ZUG, CH</span>
+  <span class="tick always">REEL — 2026</span>
+</div>
 
-        <section id="about" class="about">
-            <h2>Über uns</h2>
-            <p>Füge hier deinen Inhalt ein.</p>
-        </section>
+<div id="cursor-reticle"></div>
 
-        <section id="contact" class="contact">
-            <h2>Kontakt</h2>
-            <p>Füge hier deine Kontaktinformationen ein.</p>
-        </section>
-    </main>
+<div class="drone-wrap" id="droneIcon" aria-hidden="true">
+  <span class="drone-label" id="droneLabel">Start flying ✈</span>
+  <svg viewBox="0 0 64 64" width="100%" height="100%">
+    <line x1="16" y1="16" x2="48" y2="48" stroke="currentColor" stroke-width="2.5"/>
+    <line x1="48" y1="16" x2="16" y2="48" stroke="currentColor" stroke-width="2.5"/>
+    <circle cx="16" cy="16" r="9" fill="none" stroke="currentColor" stroke-width="2.5"/>
+    <circle cx="48" cy="16" r="9" fill="none" stroke="currentColor" stroke-width="2.5"/>
+    <circle cx="16" cy="48" r="9" fill="none" stroke="currentColor" stroke-width="2.5"/>
+    <circle cx="48" cy="48" r="9" fill="none" stroke="currentColor" stroke-width="2.5"/>
+    <rect x="27" y="27" width="10" height="10" rx="2" fill="currentColor"/>
+  </svg>
+</div>
 
-    <footer>
-        <p>&copy; 2026 THE-CRU. Alle Rechte vorbehalten.</p>
-    </footer>
+<div id="slate-overlay" role="presentation">
+  <div class="slate">
+    <div class="slate-info"><span>The Cru</span><span>Showreel</span></div>
+    <div class="slate-board">
+      <div class="slate-arm"></div>
+      <div class="slate-body">
+        <div>PROD&nbsp;&nbsp;<strong>Home</strong></div>
+        <div>DATE&nbsp;&nbsp;<strong id="slateDate">—</strong></div>
+        <div>TAKE&nbsp;&nbsp;<strong>01</strong></div>
+      </div>
+      <div class="slate-flash"></div>
+    </div>
+    <p class="slate-skip">click anywhere to skip</p>
+  </div>
+</div>
 
-    <script src="script.js"></script>
+<header class="nav" id="siteNav">
+  <a href="index.html" class="logo"><img src="assets/logo-light.png" alt="The Cru" class="logo-mark"></a>
+  <button id="navToggle" aria-label="Toggle menu" aria-expanded="false">≡</button>
+  <nav>
+    <ul id="navList">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="design.html" class="pill">Illustration ↗</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+  <section id="hero">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <p class="eyebrow" data-reveal="1">Scene 01 — Film, Photo &amp; Design CRU</p>
+      <h1 class="display hero-wordmark" data-reveal="2">
+        <span class="hw-line">THE</span>
+        <span class="cycle-wrap"><span id="cycleWord" class="cycle-word">FILM</span></span>
+        <span class="hw-line">CRU</span>
+      </h1>
+      <p class="hero-tag" data-reveal="3">Frames that hold the light. A CRU working across film, photography, illustration and design — shot on 35mm and digital, across three continents.</p>
+      <div class="hero-actions" data-reveal="4">
+        <a href="portfolio.html" class="btn btn--primary">View selected work</a>
+        <a href="contact.html" class="btn btn--ghost">Get in touch</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about-teaser">
+    <div class="wrap about-teaser">
+      <div class="portrait portrait--sm" data-reveal="1">
+        <svg class="portrait-mark" viewBox="0 0 300 300" preserveAspectRatio="xMidYMid slice"><circle cx="150" cy="120" r="55" fill="rgba(237,232,223,.18)"/><rect x="70" y="190" width="160" height="120" rx="6" fill="rgba(237,232,223,.12)"/></svg>
+      </div>
+      <div class="teaser-text">
+        <p class="eyebrow" data-reveal="1">About</p>
+        <h2 class="display" data-reveal="2" style="font-size:clamp(30px,4vw,48px);margin-bottom:18px;">Cru, not contractor.</h2>
+        <p data-reveal="3">We're a small CRU built for stories that need a steady hand outdoors and a sharp eye in the edit — documentary, adventure, and the branded work in between. One team, start to finish.</p>
+        <a href="about.html" class="link-arrow" data-reveal="3">Read the full story →</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="showreel">
+    <div class="wrap">
+      <p class="eyebrow" data-reveal="1">Showreel</p>
+      <h2 class="display" data-reveal="2" style="font-size:clamp(30px,4vw,48px);margin-bottom:28px;">2026 reel.</h2>
+      <div class="video-frame" data-reveal="3" data-provider="youtube" data-video-id="" data-title="The Cru — Showreel 2026">
+        <div class="play-btn"><svg viewBox="0 0 24 24" fill="#1a1305"><path d="M5 3v18l16-9L5 3z"/></svg></div>
+        <span class="video-label">Play Showreel</span>
+      </div>
+      <p class="video-note" data-reveal="4">Showreel link coming soon — drop in a YouTube or Vimeo URL to activate.</p>
+    </div>
+  </section>
+
+  <section id="clients">
+    <div class="wrap">
+      <p class="eyebrow" data-reveal="1">Clients</p>
+      <div class="clients-row" data-reveal="2">
+        <span class="client-name">Brand One</span>
+        <span class="client-name">Studio Nord</span>
+        <span class="client-name">Agency Three</span>
+        <span class="client-name">Field &amp; Co.</span>
+        <span class="client-name">Northbound</span>
+        <span class="client-name">Salt Collective</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="offer">
+    <div class="wrap">
+      <p class="eyebrow" data-reveal="1">What We Offer</p>
+      <h2 class="display" data-reveal="2" style="font-size:clamp(30px,4vw,48px);margin-bottom:28px;">Four ways in.</h2>
+      <div class="offer-grid" data-reveal="3">
+        <div class="offer-item"><span class="num">01</span><h4>Documentary</h4></div>
+        <div class="offer-item"><span class="num">02</span><h4>Outdoor &amp; Adventure</h4></div>
+        <div class="offer-item"><span class="num">03</span><h4>Commercial &amp; Brand</h4></div>
+        <div class="offer-item"><span class="num">04</span><h4>Photo &amp; Design</h4></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="wrap">
+      <h2 data-reveal="1">Got a story worth telling?</h2>
+      <p data-reveal="2">Let's get it on film.</p>
+      <a href="contact.html" class="btn" data-reveal="3">Start a project</a>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow" data-reveal="1">Selected Work</p>
+          <h2 class="display" data-reveal="2">A few favorites.</h2>
+        </div>
+      </div>
+    </div>
+    <div class="work-grid">
+
+      <article class="card" data-reveal="1" style="--grad:linear-gradient(160deg,#0c2a32,#184a55 45%,#3f7a82)">
+        <div class="still">
+          <span class="still-tag">01 / Feature</span>
+          <svg class="shot-mark" viewBox="0 0 100 75" preserveAspectRatio="xMidYMid slice"><circle cx="74" cy="20" r="9"/><path d="M0 55 Q25 40 50 52 T100 48 L100 75 L0 75 Z"/></svg>
+        </div>
+        <div class="card-meta">
+          <h3>Salt Water</h3>
+          <p class="mono dim">Feature Film · 2025</p>
+          <p class="mono dim gear">Alexa Mini LF · Cooke S4 35mm T2.0</p>
+        </div>
+      </article>
+
+      <article class="card" data-reveal="2" style="--grad:linear-gradient(160deg,#15170f,#2e3326 45%,#4d5840)">
+        <div class="still">
+          <span class="still-tag">02 / Documentary</span>
+          <svg class="shot-mark" viewBox="0 0 100 75" preserveAspectRatio="xMidYMid slice"><path d="M0 50 L20 30 L40 46 L60 18 L80 36 L100 12 L100 75 L0 75 Z"/></svg>
+        </div>
+        <div class="card-meta">
+          <h3>The Long Room</h3>
+          <p class="mono dim">Documentary · 2023</p>
+          <p class="mono dim gear">Sony Venice · Cooke 25mm T2.8</p>
+        </div>
+      </article>
+
+      <article class="card" data-reveal="3" style="--grad:linear-gradient(160deg,#2c1605,#6a3a10 45%,#c47a2c)">
+        <div class="still">
+          <span class="still-tag">03 / Commercial</span>
+          <svg class="shot-mark" viewBox="0 0 100 75" preserveAspectRatio="xMidYMid slice"><path d="M-10 70 L50 8 L110 70 Z"/></svg>
+        </div>
+        <div class="card-meta">
+          <h3>Echo Park</h3>
+          <p class="mono dim">Commercial · 2023</p>
+          <p class="mono dim gear">Alexa 35 · 28mm T1.9</p>
+        </div>
+      </article>
+
+    </div>
+    <div class="wrap">
+      <div class="work-preview-foot" data-reveal="1">
+        <a href="portfolio.html" class="btn btn--ghost">View full portfolio</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap footer-row">
+    <span>© 2026 The Cru. All rights reserved.</span>
+    <span>Also working in <a href="design.html">Illustration &amp; Design ↗</a></span>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
 </body>
 </html>

@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Cru — Illustration &amp; Design</title>
+<meta name="description" content="Illustration, brand work and risograph prints by The Cru.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f1ebda;
+    --paper-2:#e9e0c8;
+    --ink:#1c1b18;
+    --pink:#ff5c8a;
+    --blue:#3a6ff7;
+    --yellow:#ffc93c;
+    --orange:#ff6b35;
+    --green:#2e9e6b;
+    --display:'Fraunces', serif;
+    --body:'Archivo', sans-serif;
+    --ease:cubic-bezier(.22,.9,.26,1);
+  }
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{
+      animation-duration:.001ms !important;animation-iteration-count:1 !important;
+      transition-duration:.001ms !important;scroll-behavior:auto !important;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--body);
+    -webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(rgba(28,27,24,.05) 1px, transparent 1px);
+    background-size:5px 5px;
+  }
+  a{color:inherit;text-decoration:none;}
+  img,svg{display:block;max-width:100%;}
+  ul{list-style:none;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
+  .label{font-family:var(--body);font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;
+    letter-spacing:.16em;text-transform:uppercase;padding:6px 12px;border:1.5px solid var(--ink);
+    border-radius:999px;margin-bottom:20px;
+  }
+  .display{font-family:var(--display);font-weight:600;line-height:1.02;letter-spacing:-.01em;}
+  .display em{font-style:italic;font-weight:500;}
+  .hl{box-shadow:inset 0 -0.32em 0 0 var(--mark,var(--yellow));padding:0 .04em;}
+
+  /* nav */
+  header.nav{
+    position:sticky;top:0;z-index:40;background:var(--paper);
+    border-bottom:2px solid var(--ink);padding:18px 0;
+  }
+  .nav-row{display:flex;align-items:center;justify-content:space-between;}
+  .logo{font-family:var(--display);font-weight:700;font-size:21px;display:flex;align-items:center;}
+  .logo-mark{height:30px;width:auto;display:block;transition:opacity .25s ease;}
+  .logo-mark:hover{opacity:.7;}
+  nav ul{display:flex;gap:28px;align-items:center;}
+  nav ul a{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;position:relative;}
+  nav ul a:not(.pill)::after{content:'';position:absolute;left:0;right:0;bottom:-4px;height:2px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease);}
+  nav ul a:not(.pill):hover::after,nav ul a:not(.pill):focus-visible::after{transform:scaleX(1);}
+  nav ul a.pill{background:var(--ink);color:var(--paper);padding:9px 16px;border-radius:999px;}
+  nav ul a.pill:hover{background:var(--pink);color:var(--ink);}
+  #navToggle{display:none;background:none;border:2px solid var(--ink);width:38px;height:38px;font-weight:700;}
+  @media (max-width:760px){
+    nav ul{position:fixed;top:62px;left:20px;right:20px;background:var(--paper);border:2px solid var(--ink);
+      flex-direction:column;align-items:flex-start;padding:18px;gap:16px;
+      transform:translateY(-10px);opacity:0;pointer-events:none;transition:all .3s var(--ease);}
+    nav ul.open{transform:translateY(0);opacity:1;pointer-events:auto;}
+    #navToggle{display:block;}
+  }
+
+  /* hero */
+  #hero{position:relative;padding:90px 0 100px;overflow:hidden;}
+  h1.display{font-size:clamp(42px,7.2vw,96px);max-width:920px;}
+  .hero-tag{max-width:480px;font-size:16px;line-height:1.65;margin-top:26px;color:#4a473e;}
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px;}
+  .btn{font-weight:700;font-size:13px;letter-spacing:.04em;text-transform:uppercase;padding:14px 24px;border-radius:999px;border:2px solid var(--ink);transition:all .25s var(--ease);display:inline-block;}
+  .btn--solid{background:var(--ink);color:var(--paper);}
+  .btn--solid:hover{background:var(--pink);color:var(--ink);transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink);}
+  .btn--outline:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink);}
+
+  .sticker{
+    position:absolute;font-family:var(--body);font-weight:700;font-size:11px;letter-spacing:.08em;
+    text-transform:uppercase;background:var(--paper);border:1.5px solid var(--ink);border-radius:999px;
+    padding:8px 14px;opacity:0;animation:wobbleIn .7s var(--ease) forwards;
+  }
+  @keyframes wobbleIn{
+    0%{opacity:0;transform:translateY(-16px) rotate(calc(var(--rot) - 14deg)) scale(.7);}
+    65%{opacity:1;transform:translateY(2px) rotate(calc(var(--rot) + 4deg)) scale(1.05);}
+    100%{opacity:1;transform:translateY(0) rotate(var(--rot)) scale(1);}
+  }
+  .s1{--rot:-8deg;top:6%;right:30%;background:var(--yellow);animation-delay:.5s;}
+  .s2{--rot:6deg;top:46%;right:6%;background:var(--pink);animation-delay:.75s;}
+  .s3{--rot:-5deg;bottom:2%;right:22%;background:var(--blue);color:var(--paper);animation-delay:1s;}
+  @media (max-width:840px){.sticker{display:none;}}
+
+  /* reveal */
+  [data-reveal]{opacity:0;transform:translateY(20px);transition:opacity .7s var(--ease), transform .7s var(--ease);}
+  [data-reveal].in-view{opacity:1;transform:translateY(0);}
+  [data-reveal="1"].in-view{transition-delay:.04s;}
+  [data-reveal="2"].in-view{transition-delay:.14s;}
+  [data-reveal="3"].in-view{transition-delay:.24s;}
+
+  section{padding:90px 0;}
+  .section-head{margin-bottom:48px;}
+
+  /* about */
+  .about-grid{display:grid;grid-template-columns:.62fr 1.38fr;gap:48px;align-items:center;}
+  @media (max-width:780px){.about-grid{grid-template-columns:1fr;}}
+  .about-photo{border:2.5px solid var(--ink);overflow:hidden;max-width:340px;}
+  .about-photo img{width:100%;display:block;}
+  .about-text p{font-size:17px;line-height:1.7;color:#4a4639;max-width:540px;}
+  .section-head h2.display{font-size:clamp(32px,5vw,52px);margin-top:10px;}
+
+  /* work grid */
+  .work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+  @media (max-width:920px){.work-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:600px){.work-grid{grid-template-columns:1fr;}}
+  .piece{transition:transform .35s var(--ease);}
+  .piece:nth-child(odd){transform:rotate(-1.1deg);}
+  .piece:nth-child(even){transform:rotate(1.1deg);}
+  .piece:hover{transform:rotate(0deg) translateY(-4px);}
+  .art{position:relative;aspect-ratio:4/5;background:var(--bg);border:2px solid var(--ink);overflow:hidden;}
+  .art-photo{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s var(--ease);}
+  .piece:hover .art-photo{transform:scale(1.06);}
+  .art::after{content:'';position:absolute;inset:0;border:0px solid var(--bg);transition:border-width .35s var(--ease);pointer-events:none;}
+  .piece:hover .art::after{border-width:10px;}
+  .piece{cursor:pointer;}
+  .piece:focus-visible{outline:2.5px solid var(--ink);outline-offset:4px;}
+
+  /* brush scroll animation */
+  .brush-wrap{
+    position:fixed;top:16%;right:5%;width:60px;height:380px;z-index:15;
+    opacity:0;pointer-events:none;will-change:opacity;
+  }
+  .brush-label{
+    position:absolute;top:-28px;left:50%;transform:translateX(-50%);white-space:nowrap;
+    font-family:var(--body);font-weight:700;font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--ink);background:var(--paper);border:1.5px solid var(--ink);border-radius:999px;
+    padding:5px 12px;opacity:0;transition:opacity .2s ease;
+  }
+  @media (max-width:900px){.brush-wrap{display:none;}}
+
+  /* project detail modal */
+  .modal-backdrop{
+    position:fixed;inset:0;background:rgba(20,18,14,.72);z-index:200;
+    display:flex;align-items:center;justify-content:center;padding:28px;
+    opacity:0;pointer-events:none;transition:opacity .3s ease;
+  }
+  .modal-backdrop.open{opacity:1;pointer-events:auto;}
+  .modal-card{
+    background:var(--paper);border:2.5px solid var(--ink);max-width:760px;width:100%;
+    max-height:86vh;overflow-y:auto;padding:40px 36px 44px;position:relative;
+    transform:translateY(16px) scale(.98);transition:transform .35s var(--ease);
+  }
+  .modal-backdrop.open .modal-card{transform:translateY(0) scale(1);}
+  .modal-close{
+    position:absolute;top:16px;right:16px;width:38px;height:38px;border:1.5px solid var(--ink);
+    background:var(--paper);font-size:15px;cursor:pointer;border-radius:50%;
+  }
+  .modal-close:hover{background:var(--ink);color:var(--paper);}
+  .modal-run{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#807a68;margin-bottom:10px;}
+  .modal-title{font-size:clamp(26px,3.6vw,38px);margin-bottom:8px;padding-right:30px;}
+  .modal-meta{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#807a68;margin-bottom:18px;}
+  .modal-desc{font-size:16px;line-height:1.7;color:#4a4639;max-width:580px;margin-bottom:28px;}
+  .modal-gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+  .modal-gallery img{width:100%;border:2px solid var(--ink);object-fit:cover;aspect-ratio:1/1;}
+  .modal-gallery img.wide{grid-column:1 / -1;aspect-ratio:16/10;}
+  @media (max-width:560px){.modal-gallery{grid-template-columns:1fr;}}
+
+  /* studio & sketchbook */
+  .studio-feature{border:2px solid var(--ink);background:var(--paper-2);}
+  .studio-feature img{width:100%;display:block;}
+  .studio-caption{padding:16px 18px;font-size:13.5px;color:#5c574c;border-top:2px solid var(--ink);}
+  .studio-subhead{font-family:var(--display);font-weight:600;font-size:19px;margin:40px 0 18px;}
+  .portrait-row{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;}
+  @media (max-width:900px){.portrait-row{grid-template-columns:repeat(3,1fr);}}
+  @media (max-width:520px){.portrait-row{grid-template-columns:repeat(2,1fr);}}
+  .portrait-row img{width:100%;aspect-ratio:3/4;object-fit:cover;border:2px solid var(--ink);display:block;transition:transform .3s var(--ease);}
+  .portrait-row img:hover{transform:translateY(-4px);}
+  .run-tag{position:absolute;top:10px;left:10px;background:var(--paper);border:1.5px solid var(--ink);border-radius:999px;padding:4px 10px;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;z-index:2;}
+  .piece-meta{padding:16px 2px 0;}
+  .piece-meta h3{font-family:var(--display);font-weight:600;font-size:21px;}
+  .piece-meta p{font-size:11.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#6b6759;margin-top:5px;}
+
+  /* what I make */
+  .make-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--ink);border:2px solid var(--ink);}
+  @media (max-width:900px){.make-grid{grid-template-columns:repeat(2,1fr);}}
+  .make-item{background:var(--paper);padding:30px 22px;min-height:170px;display:flex;flex-direction:column;justify-content:space-between;transition:background .3s ease;}
+  .make-item:hover{background:var(--bg2,var(--yellow));}
+  .make-item .num{font-family:var(--display);font-style:italic;font-size:13px;}
+  .make-item h4{font-family:var(--display);font-weight:600;font-size:21px;margin-top:30px;}
+
+  /* contact */
+  #contact{background:var(--ink);color:var(--paper);border-radius:0;}
+  #contact .eyebrow{border-color:var(--paper);color:var(--paper);}
+  #contact .display{font-size:clamp(34px,6vw,68px);}
+  .contact-email{display:inline-block;margin:22px 0 30px;font-weight:700;font-size:18px;border-bottom:2px solid var(--paper);padding-bottom:3px;}
+  .contact-email:hover{color:var(--yellow);border-color:var(--yellow);}
+  .social-row{display:flex;gap:22px;font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;}
+  .social-row a:hover{color:var(--pink);}
+
+  footer{padding:36px 0;border-top:2px solid var(--ink);}
+  .footer-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;font-size:11.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#6b6759;}
+  .footer-row a{color:var(--ink);}
+  .footer-row a:hover{color:var(--pink);}
+</style>
+<noscript><style>[data-reveal]{opacity:1 !important;transform:none !important;}</style></noscript>
+</head>
+<body>
+
+<div class="brush-wrap" id="brushIcon" aria-hidden="true">
+  <span class="brush-label" id="brushLabel">Start drawing ✎</span>
+  <svg viewBox="0 0 60 380" width="60" height="380">
+    <path id="brushPath" d="M30 0 C8 40,52 80,28 120 C6 160,50 200,28 240 C8 280,48 320,30 360" fill="none" stroke="var(--pink)" stroke-width="4" stroke-linecap="round"/>
+    <g id="brushTip" stroke="var(--ink)" fill="var(--ink)">
+      <line x1="2" y1="-2" x2="20" y2="-20" stroke-width="4" stroke-linecap="round"/>
+      <rect x="-2" y="-6" width="9" height="9" transform="rotate(45 2 -2)"/>
+      <path d="M0 0 Q-8 6 -14 16 Q-4 12 4 4 Z"/>
+    </g>
+  </svg>
+</div>
+
+<header class="nav">
+  <div class="wrap nav-row">
+    <a href="design.html" class="logo"><img src="assets/logo-dark.png" alt="The Cru" class="logo-mark"></a>
+    <button id="navToggle" aria-label="Toggle menu" aria-expanded="false">≡</button>
+    <nav>
+      <ul id="navList">
+        <li><a href="#work">Work</a></li>
+        <li><a href="#make">Services</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="index.html" class="pill">← Film &amp; Cinematography</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section id="hero">
+    <div class="wrap" style="position:relative;">
+      <span class="sticker s1">★ Hand-painted</span>
+      <span class="sticker s2">Zug ⇄ Biarritz</span>
+      <span class="sticker s3">Live &amp; Custom</span>
+      <p class="eyebrow" data-reveal="1">Also makes: brand worlds, packaging &amp; live illustration</p>
+      <h1 class="display" data-reveal="2">Paper, <em>ink</em> &amp; a <span class="hl" style="--mark:var(--yellow);">little risk.</span></h1>
+      <p class="hero-tag" data-reveal="3">Illustration, branding and live event work by Katy Tännler — the design half of The Cru, working between Zug and Biarritz.</p>
+      <div class="hero-actions" data-reveal="3">
+        <a href="#work" class="btn btn--solid">See the work</a>
+        <a href="#contact" class="btn btn--outline">Start a project</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap about-grid">
+      <div class="about-photo" data-reveal="1">
+        <img src="assets/work/katy-portrait.jpg" alt="Katy Tännler hand-painting a watch strap" loading="lazy">
+      </div>
+      <div class="about-text">
+        <p class="eyebrow" data-reveal="1">Who makes this</p>
+        <h2 class="display" data-reveal="2" style="font-size:clamp(28px,3.6vw,42px);margin-bottom:16px;">Hi, I'm Katy.</h2>
+        <p data-reveal="3">I pick up wherever the camera leaves off — branding, packaging, apparel and live event illustration, plenty of it hand-painted on the spot. Based between Zug and Biarritz, I'm the design half of The Cru.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow" data-reveal="1">File 01 — Selected Work</p>
+        <h2 class="display" data-reveal="2">Selected work.</h2>
+      </div>
+      <div class="work-grid">
+
+        <article class="piece" data-reveal="1" data-project="0" tabindex="0" role="button" aria-haspopup="dialog">
+          <div class="art" style="--bg:var(--pink)">
+            <span class="run-tag">Run 01/08</span>
+            <img class="art-photo" src="assets/work/watch-straps.jpg" alt="Hand-painted CPO watch straps with custom initials and patterns" loading="lazy">
+          </div>
+          <div class="piece-meta">
+            <h3>CPO Watch Strap Customization</h3>
+            <p>Live Illustration · Event</p>
+          </div>
+        </article>
+
+        <article class="piece" data-reveal="2" data-project="1" tabindex="0" role="button" aria-haspopup="dialog">
+          <div class="art" style="--bg:var(--green)">
+            <span class="run-tag">Run 02/08</span>
+            <img class="art-photo" src="assets/work/coffee-labels.jpg" alt="Origin-inspired coffee labels for The Roasting Party — Galapagos, Honduras, El Salvador, Guatemala" loading="lazy">
+          </div>
+          <div class="piece-meta">
+            <h3>Speciality Coffee Labels</h3>
+            <p>Packaging · The Roasting Party</p>
+          </div>
+        </article>
+
+        <article class="piece" data-reveal="3" data-project="2" tabindex="0" role="button" aria-haspopup="dialog">
+          <div class="art" style="--bg:var(--blue)">
+            <span class="run-tag">Run 03/08</span>
+            <img class="art-photo" src="assets/work/velovite-map.jpg" alt="Illustrated map of La Côte Basque for Velovite electric bike rental" loading="lazy">
+          </div>
+          <div class="piece-meta">
+            <h3>Velovite — La Côte Basque</h3>
+            <p>Illustrated Map · Biarritz, FR</p>
+          </div>
+        </article>
+
+        <article class="piece" data-reveal="1" data-project="3" tabindex="0" role="button" aria-haspopup="dialog">
+          <div class="art" style="--bg:var(--orange)">
+            <span class="run-tag">Run 04/08</span>
+            <img class="art-photo" src="assets/work/revive-logo.jpg" alt="Restaurant Revive dove logo, hand-lettered wordmark" loading="lazy">
+          </div>
+          <div class="piece-meta">
+            <h3>Restaurant Revive</h3>
+            <p>Brand Identity · Zug, CH</p>
+          </div>
+        </article>
+
+        <article class="piece" data-reveal="2" data-project="4" tabindex="0" role="button" aria-haspopup="dialog">
+          <div class="art" style="--bg:var(--yellow)">
+            <span class="run-tag">Run 05/08</span>
+            <img class="art-photo" src="assets/work/lifes-a-joke.jpg" alt="Life's a Fantastic Joke t-shirt lettering and lifestyle shot" loading="lazy">
+          </div>
+          <div class="piece-meta">
+            <h3>Life's a Fantastic Joke</h3>
+            <p>Apparel · UK</p>
+          </div>
+        </article>
+
+        <article class="piece" data-reveal="3" data-project="5" tabindex="0" role="button" aria-haspopup="dialog">
+          <div class="art" style="--bg:var(--pink)">
+            <span class="run-tag">Run 06/08</span>
+            <img class="art-photo" src="assets/work/kennedy-emporium.jpg" alt="Kennedy Emporium of Aquatic Vehicles merchandise design with classical statue motif" loading="lazy">
+          </div>
+          <div class="piece-meta">
+            <h3>Kennedy Surf &amp; Coffee</h3>
+            <p>Merchandise · Biarritz, FR</p>
+          </div>
+        </article>
+
+        <article class="piece" data-reveal="1" data-project="6" tabindex="0" role="button" aria-haspopup="dialog">
+          <div class="art" style="--bg:var(--green)">
+            <span class="run-tag">Run 07/08</span>
+            <img class="art-photo" src="assets/work/wheels-waves-helmet.jpg" alt="Custom hand-painted helmet and surfboard for the 2023 Wheels and Waves Festival" loading="lazy">
+          </div>
+          <div class="piece-meta">
+            <h3>Wheels &amp; Waves Helmet</h3>
+            <p>Custom Paint · 2023 Festival</p>
+          </div>
+        </article>
+
+        <article class="piece" data-reveal="2" data-project="7" tabindex="0" role="button" aria-haspopup="dialog">
+          <div class="art" style="--bg:var(--blue)">
+            <span class="run-tag">Run 08/08</span>
+            <img class="art-photo" src="assets/work/paper-tent.jpg" alt="Skateboarding cherub illustration for Paper Tent greeting cards" loading="lazy">
+          </div>
+          <div class="piece-meta">
+            <h3>Paper Tent</h3>
+            <p>Card Design · UK</p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="studio">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow" data-reveal="1">File 02 — Studio &amp; Sketchbook</p>
+        <h2 class="display" data-reveal="2">Off the clock.</h2>
+      </div>
+      <div class="studio-feature" data-reveal="1">
+        <img src="assets/work/digital-art-collage.jpg" width="720" height="1044" alt="Collage of independent digital art posters including Swiss mountain prints, Jazz Cats, and Watch Out Ants About" loading="lazy">
+        <p class="studio-caption">Digital Art — independent posters, including a run of Swiss mountain prints (Matterhorn, Pilatus, Kleiner Mythen).</p>
+      </div>
+      <p class="studio-subhead" data-reveal="2">Portraits — fineliner, charcoal &amp; ink on paper.</p>
+      <div class="portrait-row" data-reveal="3">
+        <img src="assets/work/portrait-01.jpg" alt="Charcoal portrait study" loading="lazy">
+        <img src="assets/work/portrait-02.jpg" alt="Charcoal portrait study" loading="lazy">
+        <img src="assets/work/portrait-03.jpg" alt="Fineliner portrait study" loading="lazy">
+        <img src="assets/work/portrait-04.jpg" alt="Portrait study" loading="lazy">
+        <img src="assets/work/portrait-05.jpg" alt="Fineliner portrait study" loading="lazy">
+        <img src="assets/work/portrait-06.jpg" alt="Portrait study" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <section id="make">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow" data-reveal="1">File 03 — What I Make</p>
+        <h2 class="display" data-reveal="2">Four ways to work together.</h2>
+      </div>
+      <div class="make-grid" data-reveal="1">
+        <div class="make-item" style="--bg2:var(--pink)"><span class="num">01</span><h4>Branding &amp; Packaging</h4></div>
+        <div class="make-item" style="--bg2:var(--yellow)"><span class="num">02</span><h4>Apparel &amp; Merch</h4></div>
+        <div class="make-item" style="--bg2:var(--green)"><span class="num">03</span><h4>Illustration &amp; Maps</h4></div>
+        <div class="make-item" style="--bg2:var(--blue)"><span class="num">04</span><h4>Live &amp; Custom Work</h4></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <p class="eyebrow" data-reveal="1">File 04 — Start A Project</p>
+      <h2 class="display" data-reveal="2">Got something <em>worth printing?</em></h2>
+      <a href="mailto:hello@thecru.example" class="contact-email" data-reveal="3">hello@thecru.example</a>
+      <div class="social-row" data-reveal="3">
+        <a href="#">Instagram</a>
+        <a href="#">Are.na</a>
+        <a href="#">Shop</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div class="modal-backdrop" id="projectModal" aria-hidden="true">
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" id="modalClose" aria-label="Close project details">✕</button>
+    <p class="modal-run" id="modalRun"></p>
+    <h2 class="display modal-title" id="modalTitle"></h2>
+    <p class="modal-meta" id="modalMeta"></p>
+    <p class="modal-desc" id="modalDesc"></p>
+    <div class="modal-gallery" id="modalGallery"></div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap footer-row">
+    <span>© 2026 The Cru.</span>
+    <span>Director of Photography work lives on the <a href="index.html">main site ↗</a></span>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var btn = document.getElementById('navToggle');
+    var list = document.getElementById('navList');
+    btn.addEventListener('click', function(){
+      var open = list.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open);
+    });
+    list.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){ list.classList.remove('open'); });
+    });
+  })();
+
+  (function(){
+    var items = document.querySelectorAll('[data-reveal]');
+    if(!('IntersectionObserver' in window)){
+      items.forEach(function(i){ i.classList.add('in-view'); });
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('in-view'); io.unobserve(e.target); }
+      });
+    }, {threshold:.15});
+    items.forEach(function(i){ io.observe(i); });
+  })();
+
+  // project detail modal
+  (function(){
+    var projects = [
+      {
+        run:'Run 01/08', title:'CPO Watch Strap Customization', meta:'Live Illustration · Event',
+        desc:"Custom-designed, modern-midcentury inspired typeface and patterns for 'Certified Pre-Owned' events. Guests could choose to have either their initials or a pattern hand-painted onto a strap as a memento from the evening.",
+        images:[
+          {src:'assets/work/watch-straps.jpg', alt:'Hand-painted watch straps', wide:true},
+          {src:'assets/work/cpo-typeface-1.jpg', alt:'Custom typeface poster'},
+          {src:'assets/work/cpo-typeface-2.jpg', alt:'Custom pattern poster'}
+        ]
+      },
+      {
+        run:'Run 02/08', title:'Speciality Coffee Labels', meta:'Packaging · The Roasting Party',
+        desc:"Speciality coffee labels for The Roasting Party, an Australian-owned, UK-based coffee roaster. Each label is inspired by the country the bean originates from — the Galápagos marine iguana, for instance, is native to the Galápagos Islands.",
+        images:[
+          {src:'assets/work/coffee-labels.jpg', alt:'Coffee origin labels', wide:true},
+          {src:'assets/work/coffee-bolivia-mexico.jpg', alt:'Bolivia and Mexico coffee labels', wide:true},
+          {src:'assets/work/coffee-bags.jpg', alt:'Coffee bags with labels'}
+        ]
+      },
+      {
+        run:'Run 03/08', title:'Velovite — La Côte Basque', meta:'Illustrated Map · Biarritz, FR',
+        desc:"Work for French, Biarritz-based Velovite includes logo and merchandise design, as well as more illustrative work like this regional map of La Côte Basque.",
+        images:[
+          {src:'assets/work/velovite-map.jpg', alt:'La Côte Basque illustrated map', wide:true},
+          {src:'assets/work/velovite-lartnoa.jpg', alt:"L'Artnoa map detail"},
+          {src:'assets/work/velovite-saintesprit.jpg', alt:'Saint-Esprit map detail'}
+        ]
+      },
+      {
+        run:'Run 04/08', title:'Restaurant Revive', meta:'Brand Identity · Zug, CH',
+        desc:"Work for Restaurant Revive in Zug, Switzerland spans logo design (including a wall mural), flyers, menu illustrations, loyalty cards and Instagram content.",
+        images:[
+          {src:'assets/work/revive-logo.jpg', alt:'Revive dove logo'},
+          {src:'assets/work/revive-cards.jpg', alt:'Revive loyalty cards'},
+          {src:'assets/work/revive-menu.jpg', alt:'Revive menu illustrations', wide:true}
+        ]
+      },
+      {
+        run:'Run 05/08', title:"Life's a Fantastic Joke", meta:'Apparel · UK',
+        desc:"Shirt design and lettering for Life's a Fantastic Joke, a UK-based organic clothing brand.",
+        images:[
+          {src:'assets/work/lifes-a-joke.jpg', alt:"Life's a Fantastic Joke shirt lifestyle shot", wide:true},
+          {src:'assets/work/lifes-a-joke-folded.jpg', alt:'Folded shirts'}
+        ]
+      },
+      {
+        run:'Run 06/08', title:'Kennedy Surf & Coffee', meta:'Merchandise · Biarritz, FR',
+        desc:"Surf-inspired graphics and merchandise design for Kennedy Surf & Coffee in Biarritz, France.",
+        images:[
+          {src:'assets/work/kennedy-emporium.jpg', alt:'Kennedy Emporium merchandise design', wide:true},
+          {src:'assets/work/kennedy-logo.jpg', alt:'Kennedy Surf and Coffee logo'}
+        ]
+      },
+      {
+        run:'Run 07/08', title:'Wheels & Waves Helmet', meta:'Custom Paint · 2023 Festival',
+        desc:"A hand-customized motorbike helmet and surfboard for the 2023 Wheels and Waves Festival in Biarritz, France.",
+        images:[
+          {src:'assets/work/wheels-waves-helmet.jpg', alt:'Custom helmet and surfboard', wide:true},
+          {src:'assets/work/wheels-waves-sign.jpg', alt:'Win the helmet event sign'},
+          {src:'assets/work/wheels-waves-top.jpg', alt:'Helmet top view'}
+        ]
+      },
+      {
+        run:'Run 08/08', title:'Paper Tent', meta:'Card Design · UK',
+        desc:"Illustrated card design for Paper Tent, a UK-based online card shop.",
+        images:[
+          {src:'assets/work/paper-tent.jpg', alt:'Skateboarding cherub illustration'},
+          {src:'assets/work/paper-tent-card.jpg', alt:'Finished Paper Tent card', wide:true}
+        ]
+      }
+    ];
+
+    var modal = document.getElementById('projectModal');
+    var card = modal.querySelector('.modal-card');
+    var closeBtn = document.getElementById('modalClose');
+    var runEl = document.getElementById('modalRun');
+    var titleEl = document.getElementById('modalTitle');
+    var metaEl = document.getElementById('modalMeta');
+    var descEl = document.getElementById('modalDesc');
+    var galleryEl = document.getElementById('modalGallery');
+    var lastTrigger = null;
+
+    function open(index, trigger){
+      var p = projects[index];
+      if(!p) return;
+      lastTrigger = trigger;
+      runEl.textContent = p.run;
+      titleEl.textContent = p.title;
+      metaEl.textContent = p.meta;
+      descEl.textContent = p.desc;
+      galleryEl.innerHTML = '';
+      p.images.forEach(function(img){
+        var el = document.createElement('img');
+        el.src = img.src; el.alt = img.alt; el.loading = 'lazy';
+        if(img.wide) el.className = 'wide';
+        galleryEl.appendChild(el);
+      });
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+      card.scrollTop = 0;
+      closeBtn.focus();
+      document.body.style.overflow = 'hidden';
+    }
+    function close(){
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      if(lastTrigger) lastTrigger.focus();
+    }
+
+    document.querySelectorAll('.piece[data-project]').forEach(function(el){
+      el.addEventListener('click', function(){ open(+el.getAttribute('data-project'), el); });
+      el.addEventListener('keydown', function(e){
+        if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); open(+el.getAttribute('data-project'), el); }
+      });
+    });
+    closeBtn.addEventListener('click', close);
+    modal.addEventListener('click', function(e){ if(e.target === modal) close(); });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && modal.classList.contains('open')) close();
+    });
+  })();
+
+  // brush scroll animation — descends and leaves an inked trail behind it, then fades
+  (function(){
+    var wrap = document.getElementById('brushIcon');
+    if(!wrap) return;
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(reduce) return;
+
+    var path = document.getElementById('brushPath');
+    var brush = document.getElementById('brushTip');
+    var label = document.getElementById('brushLabel');
+    var pathLength = path.getTotalLength();
+    path.style.strokeDasharray = pathLength;
+    path.style.strokeDashoffset = pathLength;
+
+    var flightRange = 1400;
+    var ticking = false;
+
+    function update(){
+      var y = window.scrollY;
+      var progress = Math.min(Math.max(y / flightRange, 0), 1);
+
+      path.style.strokeDashoffset = pathLength * (1 - progress);
+      var pt = path.getPointAtLength(progress * pathLength);
+      brush.setAttribute('transform', 'translate(' + pt.x.toFixed(1) + ',' + pt.y.toFixed(1) + ') rotate(' + (Math.sin(progress * 14) * 10).toFixed(1) + ')');
+
+      var fadeIn = Math.min(progress / 0.05, 1);
+      var fadeOut = progress > 0.8 ? Math.max(0, 1 - (progress - 0.8) / 0.2) : 1;
+      wrap.style.opacity = (Math.min(fadeIn, fadeOut) * 0.9).toFixed(2);
+
+      var labelOpacity = progress < 0.03 ? progress / 0.03 : Math.max(0, 1 - (progress - 0.03) / 0.1);
+      label.style.opacity = labelOpacity.toFixed(2);
+
+      ticking = false;
+    }
+    window.addEventListener('scroll', function(){
+      if(!ticking){ requestAnimationFrame(update); ticking = true; }
+    }, { passive:true });
+    update();
+  })();
+</script>
+</body>
+</html>
