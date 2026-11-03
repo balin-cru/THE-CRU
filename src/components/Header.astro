@@ -9,11 +9,12 @@ interface Props {
 }
 const { overFilm = false, current } = Astro.props;
 
-// Die Seiten Projekte, Leistungen und Über uns folgen in den nächsten Schritten.
+// Eigene Seiten für Projekte, Leistungen und Über uns folgen als nächste Schritte.
+// Bis dahin führen die Punkte auf die Abschnitte der Startseite.
 const items = [
-  { label: "Projekte", href: url("projekte/") },
-  { label: "Leistungen", href: url("leistungen/") },
-  { label: "Über uns", href: url("ueber-uns/") },
+  { label: "Projekte", href: url("#projekte") },
+  { label: "Leistungen", href: url("#leistungen") },
+  { label: "Über uns", href: url("#team") },
   { label: "Kontakt", href: url("#kontakt") },
 ];
 ---

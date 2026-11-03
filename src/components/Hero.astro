@@ -1,19 +1,20 @@
 ---
+import VideoFrame from "./VideoFrame.astro";
 // Hero der Startseite: Showreel als stummer Vollbild-Loop, darüber der Claim.
-// Das Showreel fehlt noch: Bis die Loop-Datei und die Vimeo-ID vorliegen,
-// zeigt der Rahmen das dunkle Filmfenster mit Platzhalter.
 ---
-<section class="cru-hero" aria-label="Showreel" data-szene="Start">
-  <div class="cru-video">
-    <div class="cru-video__poster" style="place-items:start end;padding:96px var(--page-margin, var(--margin-desktop))">
-      <span class="cru-label">[SHOWREEL_LOOP_15S]</span>
-    </div>
-    <div class="cru-video__shade"></div>
-  </div>
+<section class="cru-hero" aria-label="Showreel">
+  <VideoFrame id="showreel" label="Showreel von THE CRU" controls="keine" />
+  <div class="cru-video__shade"></div>
   <div class="cru-hero__content">
     <h1 class="cru-hero__claim"><span>Documentary</span><span>First.</span><span class="is-light">Storytelling Always.</span></h1>
     <div class="cru-hero__bar">
       <p class="cru-hero__sub">Dokumentarfilme und Branded Documentaries aus der Zentralschweiz.</p>
+      <div class="cru-hero__actions">
+        <button class="cru-btn cru-btn--primary" type="button" data-film-oeffnet="showreel"><span class="cru-rec" aria-hidden="true"></span>Showreel ansehen</button>
+        <button class="cru-iconbtn" type="button" aria-label="Loop anhalten: Showreel von THE CRU" data-film-pause="showreel">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="2" width="3.5" height="12"/><rect x="9.5" y="2" width="3.5" height="12"/></svg>
+        </button>
+      </div>
     </div>
   </div>
 </section>

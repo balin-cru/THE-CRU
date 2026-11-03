@@ -1,0 +1,10 @@
+---
+import { kunden } from "../content/projekte";
+// Logos liegen noch nicht vor; bis dahin stehen die Namen als offene Liste.
+---
+<section class="cru-section cru-kunden" aria-labelledby="kunden-titel">
+  <h2 class="cru-kunden__titel" id="kunden-titel">Für wen wir drehen</h2>
+  <ul class="cru-kunden__liste">
+    {kunden.map((k) => <li>{k}</li>)}
+  </ul>
+</section>

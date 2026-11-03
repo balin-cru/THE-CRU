@@ -21,5 +21,9 @@ export const adobeFontsKit = "";
 // Buchungskalender für «Termin vereinbaren». Leer, bis die URL vorliegt.
 export const bookingUrl = "";
 
+// Platzhalterfilm für alle Video-Kacheln, bis die echten Loops und Filme vorliegen.
+// Von EPHI gesetzt: https://vimeo.com/1221579862
+export const platzhalterVimeo = "1221579862";
+
 /** Pfad mit Basis-URL, damit Links unter /THE-CRU/ und später unter der Domain funktionieren. */
 export const url = (path = "") => `${import.meta.env.BASE_URL.replace(/\/$/, "")}/${path.replace(/^\//, "")}`;

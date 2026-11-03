@@ -1,0 +1,14 @@
+---
+import { leistungen } from "../content/projekte";
+---
+<section class="cru-section cru-services" id="leistungen" aria-labelledby="leistungen-titel">
+  <div class="cru-services__lead">
+    <h2 class="cru-services__name" id="leistungen-titel">THE DOC CRU</h2>
+    <p class="cru-services__text">Dokumentarfilme und Branded Documentaries. Portraits, Human Stories, Unternehmensgeschichten. Echte Geschichten statt künstlicher Werbebotschaften.</p>
+  </div>
+  <ul class="cru-services__list">
+    {leistungen.map((l) => (
+      <li class="cru-services__item"><h3>{l.name}</h3><p>{l.text}</p></li>
+    ))}
+  </ul>
+</section>
