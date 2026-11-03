@@ -1,0 +1,23 @@
+---
+// Sucherleiste: vier Bildfeldecken über dem Fenster, unten rechts die aktuelle Szene.
+// Abschnitte melden ihre Szene mit data-szene="…". Keine Zeitmessung, keine Kameradaten.
+---
+<div class="cru-sucherleiste" aria-hidden="true">
+  <div class="cru-sucher">
+    <span class="cru-sucher__ecke"></span><span class="cru-sucher__ecke"></span><span class="cru-sucher__ecke"></span><span class="cru-sucher__ecke"></span>
+    <div class="cru-sucherleiste__unten"><span class="cru-sucherleiste__szene" data-szene-anzeige></span></div>
+  </div>
+</div>
+
+<script>
+  const anzeige = document.querySelector<HTMLElement>("[data-szene-anzeige]");
+  const szenen = document.querySelectorAll<HTMLElement>("[data-szene]");
+  if (anzeige && szenen.length) {
+    anzeige.textContent = szenen[0].dataset.szene ?? "";
+    // Wechsel als harter Schnitt, sobald ein Abschnitt die Bildmitte erreicht.
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) if (e.isIntersecting) anzeige.textContent = (e.target as HTMLElement).dataset.szene ?? "";
+    }, { rootMargin: "-50% 0px -50% 0px" });
+    szenen.forEach((s) => io.observe(s));
+  }
+</script>

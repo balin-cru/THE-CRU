@@ -1,0 +1,56 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Sucherleiste from "../components/Sucherleiste.astro";
+import Footer from "../components/Footer.astro";
+import { adobeFontsKit, url } from "../site";
+
+interface Props {
+  title: string;
+  description: string;
+  overFilm?: boolean;
+  current?: string;
+  noindex?: boolean;
+}
+const { title, description, overFilm = false, current, noindex = false } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const fullTitle = title === "THE CRU" ? "THE CRU – Documentary First. Storytelling Always." : `${title} – THE CRU`;
+---
+<!doctype html>
+<html lang="de-CH" data-theme="nacht">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="de_CH" />
+    <meta property="og:site_name" content="THE CRU" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="theme-color" content="#212322" />
+    <link rel="icon" type="image/svg+xml" href={url("logos/logo-creme.svg")} />
+    <script is:inline>
+      // Gespeicherte Tag-Nacht-Wahl vor dem ersten Zeichnen setzen. Ohne Wahl gilt immer Nacht.
+      try { if (localStorage.getItem("cru-theme") === "creme") document.documentElement.dataset.theme = "creme"; } catch (e) {}
+    </script>
+    {adobeFontsKit && (
+      <>
+        <link rel="preconnect" href="https://use.typekit.net" crossorigin />
+        <link rel="stylesheet" href={`https://use.typekit.net/${adobeFontsKit}.css`} />
+      </>
+    )}
+  </head>
+  <body>
+    <a class="cru-skip" href="#inhalt">Zum Inhalt</a>
+    <Header overFilm={overFilm} current={current} />
+    <Sucherleiste />
+    <main id="inhalt">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
