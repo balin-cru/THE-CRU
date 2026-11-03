@@ -1,0 +1,64 @@
+---
+import { platzhalterVimeo } from "../site";
+
+interface Props {
+  /** Vimeo-ID des Films. Fehlt sie, läuft der Platzhalterfilm. */
+  vimeo?: string;
+  /** Format des Rahmens. */
+  format?: "film" | "scope" | "portrait" | "reel" | "adaptiv";
+  /** Beschreibung für Lesehilfen, etwa «Janik Riebli, Showreel». */
+  label: string;
+  /** Status links oben auf dem Film, mit Aufnahmelicht. */
+  status?: string;
+  /** Zusätzliche Klassen. */
+  class?: string;
+  /** Fokuspunkt des Bildausschnitts in Prozent. */
+  focus?: { x: number; y: number };
+  /** Kennung, damit Knöpfe ausserhalb diesen Film öffnen oder anhalten können. */
+  id?: string;
+  /** Bedienung auf dem Film: «voll» mit «Ganzer Film», «pause» nur anhalten, «keine». */
+  controls?: "voll" | "pause" | "keine";
+}
+const { vimeo, format = "film", label, status, class: extraClass, focus, id: filmId, controls = "voll" } = Astro.props;
+const id = vimeo ?? platzhalterVimeo;
+const klasse = {
+  film: "",
+  scope: "cru-video--scope",
+  portrait: "cru-video--portrait",
+  reel: "cru-video--reel",
+  adaptiv: "cru-video--adaptive",
+}[format];
+// Hintergrund-Einbettung: stumm, Endlosschleife, ohne Vimeo-Bedienung, ohne Tracking.
+const loopSrc = `https://player.vimeo.com/video/${id}?background=1&autoplay=1&loop=1&muted=1&dnt=1`;
+const vollSrc = `https://player.vimeo.com/video/${id}?autoplay=1&dnt=1`;
+const stil = focus ? `--focus-x:${focus.x}%;--focus-y:${focus.y}%` : undefined;
+---
+<div class:list={["cru-video", klasse, extraClass]} id={filmId} style={stil} data-film data-voll={vollSrc} data-titel={label}>
+  <div class="cru-video__poster" aria-hidden="true"></div>
+  <iframe
+    class="cru-video__loop"
+    title={label}
+    data-src={loopSrc}
+    src="about:blank"
+
+    tabindex="-1"
+    aria-hidden="true"
+    allow="autoplay; fullscreen; picture-in-picture"
+  ></iframe>
+  {status && (
+    <div class="cru-video__status cru-label"><span class="cru-rec" aria-hidden="true"></span>{status}</div>
+  )}
+  {controls !== "keine" && (
+    <div class="cru-video__controls">
+      {controls === "voll" && (
+        <button class="cru-soundbtn" type="button" data-film-voll>
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 1h5v2H3v3H1zM10 1h5v5h-2V3h-3zM1 10h2v3h3v2H1zM13 10h2v5h-5v-2h3z"/></svg>
+          Ganzer Film
+        </button>
+      )}
+      <button class="cru-iconbtn" type="button" aria-label={`Loop anhalten: ${label}`} data-film-pause>
+        <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="2" width="3.5" height="12"/><rect x="9.5" y="2" width="3.5" height="12"/></svg>
+      </button>
+    </div>
+  )}
+</div>

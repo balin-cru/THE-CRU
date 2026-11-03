@@ -1,10 +1,17 @@
 ---
 import Base from "../layouts/Base.astro";
 import Hero from "../components/Hero.astro";
+import ProjectChapter from "../components/ProjectChapter.astro";
+import Haltung from "../components/Haltung.astro";
+import ServiceList from "../components/ServiceList.astro";
+import Team from "../components/Team.astro";
+import Kunden from "../components/Kunden.astro";
+import Testimonials from "../components/Testimonials.astro";
 import ContactRoutes from "../components/ContactRoutes.astro";
+import { homeProjekte } from "../content/projekte";
 import { company } from "../site";
 
-// Nur verifizierte Firmenangaben. Erweiterung (Leistungen, Filme) folgt mit den Inhalten.
+// Nur verifizierte Firmenangaben.
 const organization = {
   "@context": "https://schema.org",
   "@type": "Organization",
@@ -31,5 +38,17 @@ const organization = {
 >
   <script type="application/ld+json" set:html={JSON.stringify(organization)} />
   <Hero />
+  <section class="cru-chapters" id="projekte" aria-labelledby="projekte-titel">
+    <div class="cru-chapters__head">
+      <h2 class="cru-voices__title" id="projekte-titel">Drei Geschichten</h2>
+      <p class="cru-chapters__lead">Menschen an einem Wendepunkt, begleitet über Monate. Das ist die Arbeit, für die wir das Studio gegründet haben.</p>
+    </div>
+    {homeProjekte.map((p) => <ProjectChapter projekt={p} />)}
+  </section>
+  <Haltung />
+  <ServiceList />
+  <Team />
+  <Kunden />
+  <Testimonials />
   <ContactRoutes />
 </Base>

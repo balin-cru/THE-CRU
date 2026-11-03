@@ -1,0 +1,19 @@
+---
+import VideoFrame from "./VideoFrame.astro";
+import { team } from "../content/projekte";
+// Behind-the-Scenes-Bilder fehlen noch; bis dahin läuft der Platzhalterfilm im Rahmen.
+---
+<section class="cru-section" id="team" aria-labelledby="team-titel">
+  <h2 class="cru-voices__title" id="team-titel">Von Menschen für Menschen</h2>
+  <p class="cru-team__lead">Zwei Filmemacher, kurze Wege, direkter Draht. Wer dreht, nimmt auch ab.</p>
+  <div class="cru-team">
+    {team.map((p) => (
+      <article class="cru-person">
+        <VideoFrame format="portrait" label={`Behind the Scenes mit ${p.name}`} controls="keine" />
+        <h3 class="cru-person__name">{p.name}</h3>
+        <p class="cru-label cru-muted" style="margin:0">{p.rolle}</p>
+        {p.telefon && <a class="cru-person__phone" href={p.telefonHref}>{p.telefon}</a>}
+      </article>
+    ))}
+  </div>
+</section>
