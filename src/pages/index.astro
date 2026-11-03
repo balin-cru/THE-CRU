@@ -1,0 +1,35 @@
+---
+import Base from "../layouts/Base.astro";
+import Hero from "../components/Hero.astro";
+import ContactRoutes from "../components/ContactRoutes.astro";
+import { company } from "../site";
+
+// Nur verifizierte Firmenangaben. Erweiterung (Leistungen, Filme) folgt mit den Inhalten.
+const organization = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: company.name,
+  url: company.website,
+  email: company.email,
+  telephone: company.phone,
+  taxID: company.uid,
+  vatID: company.vat,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: company.street,
+    postalCode: company.zip,
+    addressLocality: company.city,
+    addressCountry: "CH",
+  },
+  sameAs: [company.instagram],
+};
+---
+<Base
+  title="THE CRU"
+  description="THE CRU ist ein unabhängiges Filmstudio aus der Zentralschweiz. Dokumentarfilme, Branded Documentaries, Commercial und Social."
+  overFilm
+>
+  <script type="application/ld+json" set:html={JSON.stringify(organization)} />
+  <Hero />
+  <ContactRoutes />
+</Base>

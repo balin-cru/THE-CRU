@@ -1,0 +1,106 @@
+---
+import ThemeToggle from "./ThemeToggle.astro";
+import { url } from "../site";
+
+interface Props {
+  /** Liegt der Header über einem Film (Hero)? Sonst startet er als Material. */
+  overFilm?: boolean;
+  current?: string;
+}
+const { overFilm = false, current } = Astro.props;
+
+// Die Seiten Projekte, Leistungen und Über uns folgen in den nächsten Schritten.
+const items = [
+  { label: "Projekte", href: url("projekte/") },
+  { label: "Leistungen", href: url("leistungen/") },
+  { label: "Über uns", href: url("ueber-uns/") },
+  { label: "Kontakt", href: url("#kontakt") },
+];
+---
+<header class:list={["cru-header cru-header--overlay", { "cru-header--material": !overFilm }]} data-header data-over-film={overFilm ? "" : undefined}>
+  <a class="cru-header__logo" href={url()} aria-label="THE CRU, zur Startseite">
+    <img class="cru-logo--on-nacht" src={url("logos/logo-creme.svg")} alt="" width="42" height="40" />
+    <img class="cru-logo--on-creme" src={url("logos/logo-nacht.svg")} alt="" width="42" height="40" />
+  </a>
+  <div class="cru-header__end">
+    <nav aria-label="Hauptnavigation">
+      <ul class="cru-nav">
+        {items.map((item) => (
+          <li><a href={item.href} aria-current={current === item.label ? "page" : undefined}>{item.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+    <ThemeToggle />
+    <button class="cru-menu-toggle" type="button" aria-expanded="false" aria-controls="menu" data-menu-open>Menü</button>
+  </div>
+</header>
+
+<div class="cru-menu" id="menu" role="dialog" aria-modal="true" aria-label="Menü" data-menu>
+  <button class="cru-menu-toggle cru-menu__close" type="button" data-menu-close>Schliessen</button>
+  <nav aria-label="Hauptnavigation mobil">
+    <ul class="cru-menu__list">
+      {items.map((item) => (
+        <li><a href={item.href} aria-current={current === item.label ? "page" : undefined}>{item.label}</a></li>
+      ))}
+    </ul>
+  </nav>
+  <div><ThemeToggle /></div>
+</div>
+
+<script>
+  // Header: über dem Film ohne Grund, sobald Inhalt darunter läuft als Material.
+  // Beim Runterscrollen gleitet er weg, beim Hochscrollen kommt er sofort zurück.
+  const header = document.querySelector<HTMLElement>("[data-header]");
+  if (header) {
+    const overFilm = header.hasAttribute("data-over-film");
+    let last = window.scrollY;
+    const update = () => {
+      const y = window.scrollY;
+      if (overFilm) header.classList.toggle("cru-header--material", y > 8);
+      header.classList.toggle("is-hidden", y > last && y > 240 && !document.documentElement.hasAttribute("data-menu-offen"));
+      last = y;
+    };
+    window.addEventListener("scroll", update, { passive: true });
+    update();
+  }
+
+  // Mobiles Menü: wächst als Kreis aus dem Menü-Knopf und kehrt dorthin zurück.
+  const menu = document.querySelector<HTMLElement>("[data-menu]");
+  const openBtn = document.querySelector<HTMLButtonElement>("[data-menu-open]");
+  const closeBtn = document.querySelector<HTMLButtonElement>("[data-menu-close]");
+  if (menu && openBtn && closeBtn) {
+    const setOpen = (open: boolean) => {
+      const r = openBtn.getBoundingClientRect();
+      menu.style.setProperty("--menu-x", `${r.left + r.width / 2}px`);
+      menu.style.setProperty("--menu-y", `${r.top + r.height / 2}px`);
+      menu.classList.toggle("is-open", open);
+      openBtn.setAttribute("aria-expanded", String(open));
+      document.documentElement.toggleAttribute("data-menu-offen", open);
+      document.body.style.overflow = open ? "hidden" : "";
+      (open ? closeBtn : openBtn).focus();
+    };
+    openBtn.addEventListener("click", () => setOpen(true));
+    closeBtn.addEventListener("click", () => setOpen(false));
+    menu.addEventListener("keydown", (e) => { if (e.key === "Escape") setOpen(false); });
+    menu.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => setOpen(false)));
+  }
+
+  // Tag-Nacht: setzt data-theme auf <html> und merkt sich die Wahl.
+  const root = document.documentElement;
+  const toggles = document.querySelectorAll<HTMLButtonElement>("[data-theme-toggle]");
+  const sync = () => {
+    const hell = root.dataset.theme === "creme";
+    toggles.forEach((t) => {
+      t.setAttribute("aria-pressed", String(hell));
+      t.setAttribute("aria-label", hell ? "Dunklen Modus aktivieren" : "Hellen Modus aktivieren");
+    });
+  };
+  toggles.forEach((t) => t.addEventListener("click", () => {
+    const next = root.dataset.theme === "creme" ? "nacht" : "creme";
+    root.setAttribute("data-theme-wechsel", "");
+    root.dataset.theme = next;
+    try { localStorage.setItem("cru-theme", next); } catch {}
+    sync();
+  }));
+  sync();
+</script>

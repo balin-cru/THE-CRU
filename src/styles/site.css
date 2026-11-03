@@ -1,0 +1,85 @@
+/* Ergänzungen für die Umsetzung, die im Design System nur beschrieben sind. */
+
+html { scroll-padding-top: var(--header-height); }
+body { min-height: 100svh; }
+img, svg, video { max-width: 100%; }
+
+/* Skip-Link: erst sichtbar beim Tastaturfokus */
+.cru-skip {
+  position: fixed;
+  top: var(--space-3);
+  left: var(--space-3);
+  z-index: var(--z-skip);
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-full);
+  background: var(--ink);
+  color: var(--surface);
+  font-weight: 700;
+  text-decoration: none;
+  transform: translateY(-200%);
+}
+.cru-skip:focus-visible { transform: none; }
+
+/* Header über der ganzen Seite: fix, damit er beim Hochscrollen zurückkommt */
+.cru-header--overlay { position: fixed; }
+/* Als Material liegt der Header auf surface: Text folgt dem Theme */
+.cru-header--overlay.cru-header--material,
+.cru-header--overlay.cru-header--material .cru-nav a,
+.cru-header--overlay.cru-header--material .cru-theme-toggle,
+.cru-header--overlay.cru-header--material .cru-menu-toggle { color: var(--ink); }
+
+/* Unter bp-lg: Navigation als Vollbild-Menü (siehe Header README) */
+@media (max-width: 1023px) {
+  .cru-header { height: 64px; padding-inline: var(--margin-mobile); }
+  .cru-header .cru-nav, .cru-header .cru-header__end > .cru-theme-toggle { display: none; }
+  .cru-header .cru-menu-toggle { display: inline-flex; }
+  .cru-header .cru-header__logo img { height: 32px; }
+}
+
+.cru-menu {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-menu);
+  display: grid;
+  align-content: center;
+  gap: var(--space-12);
+  padding: var(--space-24) var(--margin-mobile) var(--space-16);
+  background: var(--surface);
+  color: var(--ink);
+  clip-path: circle(0 at var(--menu-x, 100%) var(--menu-y, 0));
+  visibility: hidden;
+  transition: clip-path var(--duration-spring) var(--ease-spring), visibility 0s linear var(--duration-spring);
+}
+.cru-menu.is-open {
+  clip-path: circle(150vmax at var(--menu-x, 100%) var(--menu-y, 0));
+  visibility: visible;
+  transition: clip-path var(--duration-spring) var(--ease-spring), visibility 0s;
+}
+.cru-menu__list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-4); }
+.cru-menu__list a {
+  color: var(--ink);
+  text-decoration: none;
+  font-size: var(--text-h1);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.cru-menu__list a[aria-current="page"] { text-decoration: underline; text-decoration-color: var(--glut); text-decoration-thickness: 3px; }
+.cru-menu .cru-menu__close { display: inline-flex; color: var(--ink); position: absolute; top: var(--space-3); right: var(--margin-mobile); }
+@media (min-width: 1024px) { .cru-menu { display: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .cru-menu, .cru-menu.is-open { clip-path: none; opacity: 0; transition: opacity var(--duration-hover) var(--ease-cine), visibility 0s linear var(--duration-hover); }
+  .cru-menu.is-open { opacity: 1; transition: opacity var(--duration-hover) var(--ease-cine), visibility 0s; }
+}
+
+/* Abschnitte auf der Startseite */
+.cru-section { padding: var(--space-32) var(--page-margin, var(--margin-desktop)); }
+@media (max-width: 767px) { .cru-section { padding-block: var(--space-24); } }
+
+/* Einfache Textseiten (Impressum, Datenschutz, 404) */
+.cru-page { padding: calc(var(--header-height) + var(--space-24)) var(--page-margin, var(--margin-desktop)) var(--space-32); }
+.cru-page h1 { margin: 0 0 var(--space-12); font-size: var(--type-section); line-height: 0.92; letter-spacing: -0.045em; text-wrap: balance; }
+.cru-page h2 { margin: var(--space-12) 0 var(--space-3); font-size: 24px; line-height: 1.2; }
+.cru-page p, .cru-page address { max-width: var(--text-max); margin: 0 0 var(--space-4); font-size: 17px; line-height: 1.6; font-style: normal; }
+.cru-page a { color: var(--ink); }
+.cru-placeholder { color: var(--glut); font-weight: 700; }

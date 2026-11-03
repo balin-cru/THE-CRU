@@ -1,19 +1,19 @@
-# Dependencies
+# Abhängigkeiten
 node_modules/
 
-# Build output
-build/
+# Build
 dist/
+.astro/
 
-# OS files
+# Erzeugt aus tokens.json
+src/styles/tokens.css
+
+# System und Editor
 .DS_Store
 Thumbs.db
-
-# Editor files
 .vscode/
 .idea/
 *.swp
-*.swo
 
 # Logs
 *.log

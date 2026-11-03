@@ -1,0 +1,25 @@
+---
+import { company, url } from "../site";
+---
+<footer class="cru-footer">
+  <p class="cru-footer__claim cru-footer__mega" aria-label="Documentary First. Storytelling Always."><span>Documentary First.</span><span class="is-light">Storytelling Always.</span></p>
+  <div>
+    <img class="cru-logo--on-nacht" src={url("logos/logo-creme.svg")} alt="THE CRU" width="68" height="64" loading="lazy" />
+    <img class="cru-logo--on-creme" src={url("logos/logo-nacht.svg")} alt="THE CRU" width="68" height="64" loading="lazy" />
+  </div>
+  <address>
+    {company.name}<br />
+    {company.street}<br />
+    {company.zip} {company.city}
+  </address>
+  <div>
+    <a href={`mailto:${company.email}`}>{company.email}</a><br />
+    <a href={company.phoneHref}>{company.phone}</a><br />
+    <a href={company.instagram}>Instagram</a>
+  </div>
+  <div class="cru-footer__legal">
+    <span>UID {company.uid}</span>
+    <a href={url("impressum/")}>Impressum</a>
+    <a href={url("datenschutz/")}>Datenschutz</a>
+  </div>
+</footer>
