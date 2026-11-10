@@ -1,0 +1,22 @@
+---
+import { bookingUrl, url } from "../site";
+interface Props { name: string; rolle: string; bild?: string; telefon?: string; telefonHref?: string; mail?: string; termin?: boolean }
+const p = Astro.props;
+---
+<article class="person">
+  <div class="rahmen" data-scroll data-parallax>
+    {p.bild ? <img class="rahmen__bild" src={url(p.bild)} alt={p.name} width="1125" height="1500" loading="lazy" decoding="async" />
+            : <span class="rahmen__platz">[PORTRAIT_{p.name.split(" ")[0].toUpperCase()}]</span>}
+  </div>
+  <h3>{p.name}</h3>
+  <p class="leise">{p.rolle}</p>
+  {(p.telefon || p.mail) && (
+    <div class="person__kontakt">
+      {p.termin
+        ? <button class="pille pille--creme" type="button" data-termin={p.name} data-termin-src={bookingUrl} data-termin-link="https://calendar.app.google/fApaZb7ZBqKw43t26"><span class="rec" aria-hidden="true"></span>Termin buchen</button>
+        : p.mail && <a class="pille pille--creme" href={`mailto:${p.mail}?subject=${encodeURIComponent("Terminanfrage")}`}><span class="rec" aria-hidden="true"></span>Termin anfragen</a>}
+      {p.telefon && <a class="pille pille--leise" href={p.telefonHref}>{p.telefon}</a>}
+      {p.mail && <a class="pille pille--leise" href={`mailto:${p.mail}`}>{p.mail}</a>}
+    </div>
+  )}
+</article>

@@ -1,0 +1,18 @@
+---
+import { faq } from "../content/projekte";
+interface Props { ton?: "nacht" | "creme" }
+const { ton = "creme" } = Astro.props;
+---
+<section class={`block ton-${ton} faq`} data-ton={ton} aria-labelledby="faq-titel">
+  <div class="faq__raster">
+    <h2 class="faq__titel" id="faq-titel" data-reveal>Häufige Fragen</h2>
+    <div class="faq__liste">
+      {faq.map((f) => (
+        <details>
+          <summary>{f.frage}</summary>
+          <p class={f.antwort.startsWith("[") ? "platzhalter" : "leise"}>{f.antwort}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,14 @@
+---
+import Pfeil from "./Pfeil.astro";
+import type { Projekt } from "../content/projekte";
+import { url } from "../site";
+interface Props { p: Projekt; klasse?: string; link?: boolean }
+const { p, klasse = "", link = true } = Astro.props;
+---
+<div class={`info ${klasse}`}>
+  <div class="info__text">
+    <p class="subline">{p.subline}</p>
+    <ul class="tags" aria-label="Themen">{p.tags.map((t) => <li>{t}</li>)}</ul>
+  </div>
+  {link && <a class="pille pille--leise" href={url(`projekte/${p.slug}/`)}>Zum Projekt <Pfeil /></a>}
+</div>

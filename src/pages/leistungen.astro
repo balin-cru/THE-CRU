@@ -1,0 +1,26 @@
+---
+import Seite from "../layouts/Seite.astro";
+import Angebot from "../components/Angebot.astro";
+import Kunden from "../components/Kunden.astro";
+import Faq from "../components/Faq.astro";
+import Kontakt from "../components/Kontakt.astro";
+const sprung = [["werbung", "Werbevideo und Imagefilm"], ["doc", "THE DOC CRU"], ["social", "THE SOCIAL CRU"], ["drone", "THE DRONE CRU"], ["design", "THE DESIGN CRU"]];
+---
+<Seite title="Leistungen" aktiv="leistungen" description="Werbevideo, Imagefilm, Dokumentarfilm, Social Media, Drohnenaufnahmen und Design von THE CRU aus Rotkreuz.">
+  <section class="block ton-nacht seitenkopf" data-ton="nacht" aria-labelledby="ls-titel">
+    <h1 class="mega" id="ls-titel">Leistungen</h1>
+    <p class="leise">Werbevideo, Imagefilm oder Dokumentarfilm: Im Zentrum stehen immer Menschen und das, was sie bewegt. Dazu Social, Drohne und Design, alles aus einer Hand.</p>
+    <nav class="sprung" aria-label="Zu den Leistungen">{sprung.map(([id, n]) => <a class="pille pille--leise" href={`#${id}`}>{n}</a>)}</nav>
+  </section>
+  <Angebot id="werbung" ton="creme" wort="Werbevideo" zusatz="Imagefilm" tint="t-werbung" tags={["Werbevideo", "Imagefilm", "Kampagnen", "Branded Content"]}
+    text="Werbevideos und Imagefilme, die nicht nach Werbung aussehen. Wir stellen die Menschen hinter deiner Marke in den Fokus und erzählen so, dass dein Publikum etwas fühlt. Das bleibt länger hängen als jeder Slogan." referenzen={["el-tony-mate", "baden-ist"]} />
+  <Angebot id="doc" ton="nacht" wort="Doc" tint="t-doc" gespiegelt tags={["Portraits", "Human Stories", "Unternehmensgeschichten"]}
+    text="Dokumentarfilme und Branded Documentaries. Echte Geschichten statt künstlicher Werbebotschaften." referenzen={["janik-riebli", "leandro-rohner", "baden-ist"]} />
+  <Angebot id="social" ton="creme" wort="Social" tint="t-social" tags={["Reels", "Social-Kampagnen", "Short-Form", "Paid Social"]}
+    text="Reels, Social-Kampagnen, Short-Form-Storytelling, Paid Social." referenzen={["el-tony-mate", "bucherer-cpo"]} />
+  <Angebot id="drone" ton="nacht" wort="Drone" tint="t-drone" gespiegelt tags={["FPV", "Luftaufnahmen"]} text="FPV- und Luftaufnahmen. Neue Perspektiven." />
+  <Angebot id="design" ton="creme" wort="Design" tint="t-design" tags={["Illustration", "Art Direction"]} text="Illustration und Art Direction, von Hand gezeichnet." referenzen={["bucherer-cpo"]} />
+  <Kunden ton="nacht" />
+  <Faq ton="creme" />
+  <Kontakt ton="nacht" />
+</Seite>

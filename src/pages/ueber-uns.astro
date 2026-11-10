@@ -1,0 +1,56 @@
+---
+import Seite from "../layouts/Seite.astro";
+import Pfeil from "../components/Pfeil.astro";
+import Person from "../components/Person.astro";
+import Kunden from "../components/Kunden.astro";
+import Kontakt from "../components/Kontakt.astro";
+import { team } from "../content/projekte";
+import { company, url } from "../site";
+const werte = [
+  { titel: "Menschen zuerst", text: "Jede Geschichte beginnt bei den Menschen vor der Kamera. Wir hören zu, bevor wir drehen." },
+  { titel: "Kurze Wege", text: "Ein kleines Studio, direkte Kommunikation, schnelle Entscheide. Wer dreht, nimmt auch ab." },
+  { titel: "Ein Filmstudio", text: "Wir sind keine klassische Werbeagentur. Wir denken in Bildern, Figuren und Momenten, die bleiben." },
+];
+const maps = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${company.name}, ${company.street}, ${company.zip} ${company.city}`)}`;
+---
+<Seite title="Über uns" aktiv="ueber-uns" description="THE CRU ist ein unabhängiges Filmstudio aus der Zentralschweiz, gegründet von zwei Filmemachern. Von Menschen für Menschen.">
+  <section class="block ton-nacht seitenkopf" data-ton="nacht" aria-labelledby="uu-titel">
+    <h1 class="mega" id="uu-titel">Von Menschen für Menschen</h1>
+    <p class="leise">THE CRU ist ein unabhängiges Filmstudio aus der Zentralschweiz, gegründet von zwei Filmemachern. Persönlich, direkt und nah an den Menschen, von denen wir erzählen.</p>
+  </section>
+
+  <section class="block ton-creme haltung" data-ton="creme" aria-labelledby="werte-titel">
+    <h2 class="haltung__satz" id="werte-titel" data-reveal>Story First. <span class="glut-teil">Emotion Always.</span></h2>
+    <div class="werte">
+      {werte.map((w) => <div><h3>{w.titel}</h3><p class="leise">{w.text}</p></div>)}
+    </div>
+  </section>
+
+  <section class="block ton-nacht team" data-ton="nacht" aria-labelledby="team-titel">
+    <div class="kopfzeile kopfzeile--gespiegelt">
+      <h2 data-reveal class="mega" id="team-titel">Das Team</h2>
+      <p class="leise">Regie, Kamera und Design unter einem Dach. Ruf an oder buch direkt einen Termin.</p>
+    </div>
+    <div class="gruender team-drei">
+      {team.map((t) => <Person {...t} />)}
+    </div>
+  </section>
+
+  <section class="block ton-creme haltung" data-ton="creme" aria-labelledby="studio-titel">
+    <div class="studio">
+      <button class="filmlink intro-film" type="button" data-oeffnet="Hinter den Kulissen" data-ton-film="t-person" aria-label="Video hinter den Kulissen ansehen">
+        <div class="film t-person"><div class="film__vignette"></div><span class="platz">[Behind the Scenes]</span></div>
+        <span class="spielknopf" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 1.5l11 6.5-11 6.5z" /></svg></span>
+      </button>
+      <div>
+        <h2 class="faq__titel" id="studio-titel" data-reveal>Das Studio</h2>
+        <p>Unser Studio liegt in Rotkreuz, mitten in der Zentralschweiz. Von hier aus drehen wir für Marken, Städte und Menschen.</p>
+        <a class="pille pille--nacht" href={maps} target="_blank" rel="noopener">{company.street}, {company.zip} {company.city} <Pfeil /></a>
+        <a class="pille pille--leise" href={url("projekte/")}>Unsere Projekte <Pfeil /></a>
+      </div>
+    </div>
+  </section>
+
+  <Kunden ton="nacht" />
+  <Kontakt ton="creme" />
+</Seite>

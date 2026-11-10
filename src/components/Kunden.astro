@@ -1,10 +1,25 @@
 ---
 import { kunden } from "../content/projekte";
-// Logos liegen noch nicht vor; bis dahin stehen die Namen als offene Liste.
+import logos from "../../public/bilder/logos.json";
+import { url } from "../site";
+interface Props { ton?: "nacht" | "creme" }
+const { ton = "nacht" } = Astro.props;
+const masse = Object.fromEntries(logos.map((l) => [l.slug, l]));
+const eintraege = kunden.map((k) => {
+  const l = masse[k.slug]; const v = l.w / l.h;
+  const h = Math.max(26, Math.min(60, 50 * v ** -0.42));
+  return { ...k, w: l.w, h: l.h, sw: Math.round(h * v), sh: Math.round(h) };
+});
 ---
-<section class="cru-section cru-kunden" aria-labelledby="kunden-titel">
-  <h2 class="cru-kunden__titel" id="kunden-titel">Für wen wir drehen</h2>
-  <ul class="cru-kunden__liste">
-    {kunden.map((k) => <li>{k}</li>)}
-  </ul>
+<section class={`block ton-${ton} kunden`} data-ton={ton} aria-label="Für wen wir drehen">
+  <h2>Für wen wir drehen</h2>
+  <div class="band" data-lauf="-1" data-tempo="0.6">
+    <div class="band__spur">
+      {[0, 1].map((i) => (
+        <ul aria-hidden={i === 1 ? "true" : undefined}>
+          {eintraege.map((k) => <li><img class="kunden-logo" src={url(`bilder/logos/${k.slug}.png`)} alt={i === 1 ? "" : k.name} style={`--w:${k.sw}px;--h:${k.sh}px`} width={k.w} height={k.h} loading="lazy" decoding="async" /></li>)}
+        </ul>
+      ))}
+    </div>
+  </div>
 </section>

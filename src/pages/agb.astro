@@ -1,0 +1,22 @@
+---
+import Seite from "../layouts/Seite.astro";
+import { company } from "../site";
+---
+<Seite title="AGB" description="Allgemeine Geschäftsbedingungen der THE CRU GmbH." noindex kontaktHier={false}>
+  <section class="block ton-nacht seitenkopf" data-ton="nacht" aria-labelledby="agb-titel">
+    <h1 class="mega" id="agb-titel">AGB</h1>
+    <p class="leise">Allgemeine Geschäftsbedingungen der {company.name} für Filmproduktionen und weitere Leistungen.</p>
+  </section>
+  <section class="block ton-creme recht" data-ton="creme" aria-label="Allgemeine Geschäftsbedingungen">
+    <div class="recht__raster">
+      <div class="recht__stand leise">
+        <p>Stand: <span class="platzhalter">[DATUM]</span></p>
+        <p>{company.name}<br />{company.street}, {company.zip} {company.city}<br />UID {company.uid}</p>
+      </div>
+      <div class="recht__text">
+        <div class="recht__platz"><p>[AGB_TEXT, von THE CRU zu liefern]</p></div>
+        <p class="leise">Fragen zu den AGB? <a href={`mailto:${company.email}`}>{company.email}</a></p>
+      </div>
+    </div>
+  </section>
+</Seite>

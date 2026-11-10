@@ -1,0 +1,30 @@
+---
+import Seite from "../../layouts/Seite.astro";
+import Film from "../../components/Film.astro";
+import Info from "../../components/Info.astro";
+import Kontakt from "../../components/Kontakt.astro";
+import { kategorien, projekte } from "../../content/projekte";
+---
+<Seite title="Projekte" aktiv="projekte" description="Dokumentarfilme, Werbung und Social-Media-Produktionen von THE CRU: Geschichten von Menschen aus der Schweiz.">
+  <section class="block ton-nacht seitenkopf" data-ton="nacht" aria-labelledby="pj-titel">
+    <h1 class="mega" id="pj-titel">Projekte</h1>
+    <p class="leise">Geschichten von Menschen, für Marken, für Social und fürs grosse Bild. Jede Arbeit beginnt mit der Frage, was jemanden bewegt.</p>
+    <div class="filter" role="group" aria-label="Projekte filtern" data-filter-leiste>
+      <button class="pille pille--leise" type="button" data-filter="alle" aria-pressed="true">Alle</button>
+      {kategorien.map((k) => <button class="pille pille--leise" type="button" data-filter={k.id} aria-pressed="false">{k.name}</button>)}
+    </div>
+  </section>
+  <section class="block ton-nacht" data-ton="nacht" aria-label="Alle Projekte">
+    <div class="projekt-raster">
+      {projekte.map((p, i) => (
+        <article class="projekt-kachel" data-kategorien={p.kategorien.join(" ")}>
+          <Film p={p} laden={i < 2 ? "eager" : "lazy"} />
+          <h2>{p.anzeige ?? p.titel}</h2>
+          <Info p={p} />
+        </article>
+      ))}
+      <p class="projekt-raster__leer leise" data-filter-leer hidden>In dieser Kategorie folgen bald Projekte.</p>
+    </div>
+  </section>
+  <Kontakt ton="creme" />
+</Seite>

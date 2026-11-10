@@ -1,0 +1,5 @@
+---
+interface Props { zurueck?: boolean }
+const { zurueck = false } = Astro.props;
+---
+<svg class="pfeil" viewBox="0 0 16 16" aria-hidden="true"><path d={zurueck ? "M14 8H3M7 4L3 8l4 4" : "M2 8h11M9 4l4 4-4 4"} /></svg>

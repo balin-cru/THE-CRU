@@ -1,10 +1,17 @@
 ---
-import Base from "../layouts/Base.astro";
+import Seite from "../layouts/Seite.astro";
 ---
-<Base title="Datenschutz" description="Datenschutzerklärung der THE CRU GmbH." noindex>
-  <article class="cru-page" data-szene="Datenschutz">
-    <h1>Datenschutz</h1>
-    <p class="cru-placeholder--klein">[DATENSCHUTZERKLAERUNG]</p>
-    <p>Die Datenschutzerklärung folgt vor dem Start der Website. Sie muss unter anderem Adobe Fonts und Vimeo nennen.</p>
-  </article>
-</Base>
+<Seite title="Datenschutz" description="Datenschutzerklärung der THE CRU GmbH." noindex kontaktHier={false}>
+  <section class="block ton-nacht seitenkopf" data-ton="nacht" aria-labelledby="ds-titel">
+    <h1 class="mega" id="ds-titel">Datenschutz</h1>
+  </section>
+  <section class="block ton-creme recht" data-ton="creme" aria-label="Datenschutzerklärung">
+    <div class="recht__raster">
+      <div class="recht__stand leise"><p>Stand: <span class="platzhalter">[DATUM]</span></p></div>
+      <div class="recht__text">
+        <div class="recht__platz"><p>[DATENSCHUTZERKLAERUNG]</p></div>
+        <p class="leise">Die Erklärung muss unter anderem Vimeo, Google Terminplaner, Google Maps und gegebenenfalls Adobe Fonts nennen.</p>
+      </div>
+    </div>
+  </section>
+</Seite>

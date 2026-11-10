@@ -1,0 +1,33 @@
+---
+import Pfeil from "./Pfeil.astro";
+import Film from "./Film.astro";
+import { projekte } from "../content/projekte";
+import { url } from "../site";
+interface Props { id: string; ton: "nacht" | "creme"; wort: string; zusatz?: string; text: string; tags: string[]; tint: string; gespiegelt?: boolean; referenzen?: string[] }
+const { id, ton, wort, zusatz, text, tags, tint, gespiegelt = false, referenzen = [] } = Astro.props;
+const refs = referenzen.map((s) => projekte.find((p) => p.slug === s)!);
+const leer = Math.max(0, 4 - refs.length);
+---
+<section class={`block ton-${ton} angebot${gespiegelt ? " angebot--gespiegelt" : ""}`} id={id} data-ton={ton} aria-labelledby={`a-${id}`}>
+  <div class="angebot__kopf">
+    {zusatz
+      ? <h2 data-reveal class="marke marke--lang" id={`a-${id}`} aria-label={`${wort} und ${zusatz}`}><span class="wort" set:html={wort.replace("video", "&shy;video")} /><span class="rand">und {zusatz}</span></h2>
+      : <h2 data-reveal class="marke" id={`a-${id}`} aria-label={`THE ${wort.toUpperCase()} CRU`}><span class="rand">The</span><span class="wort">{wort}</span><span class="rand">Cru</span></h2>}
+    <div class="angebot__text">
+      <ul class="tags" aria-label="Formate">{tags.map((t) => <li>{t}</li>)}</ul>
+      <p>{text}</p>
+      <a class={`pille ${ton === "creme" ? "pille--nacht" : "pille--creme"}`} href="#kontakt"><span class="rec" aria-hidden="true"></span>Unverbindlich anfragen</a>
+    </div>
+  </div>
+  <div class="slider" data-slider>
+    <div class="slider__kopf"><h3>Referenzen</h3><div class="slider__knoepfe"><button class="rund" type="button" aria-label="Vorherige Referenz"><Pfeil zurueck /></button><button class="rund" type="button" aria-label="Nächste Referenz"><Pfeil /></button></div></div>
+    <ul class="spur">
+      {refs.map((p) => (
+        <li class="karte"><Film p={p} sucher={false} /><h4>{p.anzeige ?? p.titel}</h4><p class="leise">{p.subline}</p><a class="pille pille--leise" href={url(`projekte/${p.slug}/`)}>Zum Projekt</a></li>
+      ))}
+      {Array.from({ length: leer }, (_, i) => (
+        <li class="karte"><div class={`film ${tint}`}><div class="film__vignette"></div></div><h4 class="platzhalter">[REFERENZ_{id.toUpperCase()}_{refs.length + i + 1}]</h4><p class="leise">[Kunde, Projekt]</p></li>
+      ))}
+    </ul>
+  </div>
+</section>
