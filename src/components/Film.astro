@@ -1,0 +1,13 @@
+---
+// Filmkachel: Bild oder Platzhalterfläche, Klick spielt den Film im Vollbild.
+import type { Projekt } from "../content/projekte";
+import { url } from "../site";
+interface Props { p: Projekt; sucher?: boolean; bild?: boolean; laden?: "lazy" | "eager" }
+const { p, sucher = true, bild = true, laden = "lazy" } = Astro.props;
+---
+<button class="filmlink" type="button" data-oeffnet={p.anzeige ?? p.titel} data-ton-film={p.tint} data-projekt={url(`projekte/${p.slug}/`)} data-vimeo={p.vimeo} aria-label={`${p.titel}, Film ansehen`}>
+  {bild && p.bild
+    ? <div class="film film--bild" style={`--fokus: ${p.bild.fokus ?? "50% 50%"}`}><img class="film__bild" src={url(p.bild.src)} alt="" width={p.bild.w} height={p.bild.h} loading={laden} decoding="async" /><div class="film__vignette"></div></div>
+    : <div class={`film ${p.tint}`}><div class="film__vignette"></div></div>}
+  {sucher && <span class="sucher" aria-hidden="true"><i></i><i></i><i></i><i></i></span>}
+</button>

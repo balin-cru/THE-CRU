@@ -1,10 +1,11 @@
 ---
-import Base from "../layouts/Base.astro";
+import Seite from "../layouts/Seite.astro";
 import { url } from "../site";
 ---
-<Base title="Seite nicht gefunden" description="Diese Seite gibt es nicht." noindex>
-  <article class="cru-page" data-szene="404">
-    <h1>Diese Seite gibt es nicht.</h1>
-    <p>Vielleicht ist sie noch im Schnitt. <a class="cru-link" href={url()}>Zur Startseite</a></p>
-  </article>
-</Base>
+<Seite title="Seite nicht gefunden" description="Diese Seite gibt es nicht." noindex kontaktHier={false}>
+  <section class="block ton-nacht stub" data-ton="nacht" aria-labelledby="nf-titel">
+    <h1 class="mega" id="nf-titel">Nicht gefunden</h1>
+    <p class="leise">Vielleicht ist diese Seite noch im Schnitt.</p>
+    <div class="knoepfe"><a class="pille pille--creme" href={url()}>Zur Startseite</a><a class="pille pille--leise" href={url("projekte/")}>Projekte ansehen</a></div>
+  </section>
+</Seite>

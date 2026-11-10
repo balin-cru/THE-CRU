@@ -1,0 +1,51 @@
+---
+import Seite from "../../layouts/Seite.astro";
+import Film from "../../components/Film.astro";
+import Info from "../../components/Info.astro";
+import Kontakt from "../../components/Kontakt.astro";
+import { kategorien, projekte, type Projekt } from "../../content/projekte";
+import { url } from "../../site";
+export function getStaticPaths() {
+  return projekte.map((p, i) => ({ params: { slug: p.slug }, props: { p, naechstes: projekte[(i + 1) % projekte.length] } }));
+}
+const { p, naechstes } = Astro.props as { p: Projekt; naechstes: Projekt };
+const titel = p.anzeige ?? p.titel;
+const bilder = p.bilder ?? [];
+const art = p.kategorien.map((k) => kategorien.find((x) => x.id === k)!.name).join(", ");
+---
+<Seite title={p.titel} aktiv="projekte" description={`${p.titel}: ${p.subline} Ein Projekt von THE CRU.`}>
+  <section class="block ton-nacht projekt-kopf" data-ton="nacht" aria-labelledby="p-titel">
+    <h1 class="mega" id="p-titel" data-reveal>{titel}</h1>
+    <Info p={p} link={false} />
+    <div class="projekt-film"><Film p={p} laden="eager" /></div>
+  </section>
+
+  <section class="block ton-creme geschichte" data-ton="creme" aria-labelledby="g-titel">
+    <div class="geschichte__raster">
+      <h2 class="faq__titel" id="g-titel" data-reveal>Die Geschichte</h2>
+      <div class="geschichte__text">
+        {p.geschichte.map((s) => <p>{s}</p>)}
+        <p class="platzhalter geschichte__hinweis">[Weitere Geschichte, Zitate und Hintergrund folgen]</p>
+      </div>
+    </div>
+    <div class="bilder">
+      {bilder.length
+        ? bilder.map((b) => <figure><img src={url(b.src)} alt={b.alt} width={b.w} height={b.h} loading="lazy" decoding="async" /></figure>)
+        : [1, 2].map((n) => <figure><div class="platz-flaeche">[STANDBILD_{p.slug.toUpperCase().replaceAll("-", "_")}_{n}]</div></figure>)}
+    </div>
+    <dl class="angaben">
+      <div><dt class="leise">Art</dt><dd>{art}</dd></div>
+      <div><dt class="leise">Kunde</dt><dd class={p.kunde ? "" : "platzhalter"}>{p.kunde ?? "[KUNDE]"}</dd></div>
+      <div><dt class="leise">Jahr</dt><dd class={p.jahr ? "" : "platzhalter"}>{p.jahr ?? "[JAHR]"}</dd></div>
+    </dl>
+  </section>
+
+  <section class="block ton-nacht naechstes" data-ton="nacht" aria-label="Nächstes Projekt">
+    <a href={url(`projekte/${naechstes.slug}/`)}>
+      <p class="leise">Nächstes Projekt</p>
+      <p class="naechstes__titel">{naechstes.anzeige ?? naechstes.titel}</p>
+      <p class="subline">{naechstes.subline}</p>
+    </a>
+  </section>
+  <Kontakt ton="creme" />
+</Seite>

@@ -1,0 +1,62 @@
+[
+ {
+  "slug": "el-tony-mate",
+  "name": "El Tony Mate",
+  "w": 226,
+  "h": 240
+ },
+ {
+  "slug": "bucherer",
+  "name": "Bucherer",
+  "w": 600,
+  "h": 78
+ },
+ {
+  "slug": "baden-ist",
+  "name": "Stadt Baden",
+  "w": 600,
+  "h": 160
+ },
+ {
+  "slug": "woodupp",
+  "name": "WoodUpp",
+  "w": 600,
+  "h": 135
+ },
+ {
+  "slug": "gasser-felstechnik",
+  "name": "Gasser Felstechnik",
+  "w": 240,
+  "h": 240
+ },
+ {
+  "slug": "kuechler-technik",
+  "name": "Küchler Technik",
+  "w": 600,
+  "h": 152
+ },
+ {
+  "slug": "eberli",
+  "name": "Eberli AG",
+  "w": 500,
+  "h": 90
+ },
+ {
+  "slug": "whatever-man",
+  "name": "Whatever Man",
+  "w": 553,
+  "h": 152
+ },
+ {
+  "slug": "cu-camper",
+  "name": "CU Camper",
+  "w": 600,
+  "h": 81
+ },
+ {
+  "slug": "evz",
+  "name": "EVZ",
+  "w": 240,
+  "h": 240
+ }
+]

@@ -18,8 +18,9 @@ export const company = {
 // zum Beispiel "abc1def". Leer lassen, solange es kein Webprojekt gibt; dann gilt der Fallback.
 export const adobeFontsKit = "";
 
-// Buchungskalender für «Termin vereinbaren». Leer, bis die URL vorliegt.
-export const bookingUrl = "";
+// Google-Terminplaner von Balin (Inline-Einbettung, von EPHI am 2026-11-03). Kurzlink: https://calendar.app.google/fApaZb7ZBqKw43t26
+// Ephraim hat noch keinen eigenen Terminplaner.
+export const bookingUrl = "https://calendar.google.com/calendar/appointments/schedules/AcZssZ2GG4-RSG8OxUYJojIxJoQgHiQUPMJqGL5yxVnyHZ_Kj9Z8XpkQYpvhanO-MyROyf9tI7lIoBoQ?gv=true";
 
 // Platzhalterfilm für alle Video-Kacheln, bis die echten Loops und Filme vorliegen.
 // Von EPHI gesetzt: https://vimeo.com/1221579862

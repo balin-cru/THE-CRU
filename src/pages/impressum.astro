@@ -1,23 +1,22 @@
 ---
-import Base from "../layouts/Base.astro";
+import Seite from "../layouts/Seite.astro";
 import { company } from "../site";
 ---
-<Base title="Impressum" description="Impressum der THE CRU GmbH, Rotkreuz.">
-  <article class="cru-page" data-szene="Impressum">
-    <h1>Impressum</h1>
-    <address>
-      {company.name}<br />
-      {company.street}<br />
-      {company.zip} {company.city}<br />
-      {company.country}
-    </address>
-    <p>
-      <a href={`mailto:${company.email}`}>{company.email}</a><br />
-      <a href={company.phoneHref}>{company.phone}</a>
-    </p>
-    <h2>Handelsregister</h2>
-    <p>UID {company.uid}<br />MWST {company.vat}</p>
-    <h2>Vertretungsberechtigte Personen</h2>
-    <p class="cru-placeholder--klein">[VERTRETUNGSBERECHTIGTE_PERSONEN]</p>
-  </article>
-</Base>
+<Seite title="Impressum" description="Impressum der THE CRU GmbH, Rotkreuz." kontaktHier={false}>
+  <section class="block ton-nacht seitenkopf" data-ton="nacht" aria-labelledby="im-titel">
+    <h1 class="mega" id="im-titel">Impressum</h1>
+  </section>
+  <section class="block ton-creme recht" data-ton="creme" aria-label="Angaben">
+    <div class="recht__raster">
+      <div class="recht__stand leise"><p>{company.name}</p></div>
+      <div class="recht__text">
+        <address>{company.name}<br />{company.street}<br />{company.zip} {company.city}<br />{company.country}</address>
+        <p><a href={`mailto:${company.email}`}>{company.email}</a><br /><a href={company.phoneHref}>{company.phone}</a></p>
+        <h2>Handelsregister</h2>
+        <p>UID {company.uid}<br />MWST {company.vat}</p>
+        <h2>Vertretungsberechtigte Personen</h2>
+        <p class="platzhalter">[VERTRETUNGSBERECHTIGTE_PERSONEN]</p>
+      </div>
+    </div>
+  </section>
+</Seite>

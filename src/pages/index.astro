@@ -1,54 +1,99 @@
 ---
-import Base from "../layouts/Base.astro";
-import Hero from "../components/Hero.astro";
-import ProjectChapter from "../components/ProjectChapter.astro";
-import Haltung from "../components/Haltung.astro";
-import ServiceList from "../components/ServiceList.astro";
-import Team from "../components/Team.astro";
+import Seite from "../layouts/Seite.astro";
+import Pfeil from "../components/Pfeil.astro";
+import Film from "../components/Film.astro";
+import Info from "../components/Info.astro";
+import Person from "../components/Person.astro";
 import Kunden from "../components/Kunden.astro";
-import Testimonials from "../components/Testimonials.astro";
-import ContactRoutes from "../components/ContactRoutes.astro";
-import { homeProjekte } from "../content/projekte";
-import { company } from "../site";
-
-// Nur verifizierte Firmenangaben.
-const organization = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: company.name,
-  url: company.website,
-  email: company.email,
-  telephone: company.phone,
-  taxID: company.uid,
-  vatID: company.vat,
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: company.street,
-    postalCode: company.zip,
-    addressLocality: company.city,
-    addressCountry: "CH",
-  },
-  sameAs: [company.instagram],
-};
+import Faq from "../components/Faq.astro";
+import Kontakt from "../components/Kontakt.astro";
+import { startProjekte, team } from "../content/projekte";
+import { url } from "../site";
+const [janik, ...duo] = startProjekte;
+const dienste = [
+  { id: "werbung", vorschau: "t-werbung", gross: true, html: '<span class="wort">Werbe&shy;video</span><span class="duenn zeile">und Imagefilm</span>', text: "Werbung, die nicht nach Werbung aussieht. Echte Menschen statt Hochglanz, emotional erzählt und auf den Punkt geschnitten." },
+  { id: "doc", vorschau: "t-doc", gross: true, html: '<span class="duenn">The</span> <span class="wort">Doc</span> <span class="duenn">Cru</span>', text: "Dokumentarfilme und Branded Documentaries. Portraits, Human Stories, Unternehmensgeschichten." },
+  { id: "social", vorschau: "t-social", html: '<span class="duenn">The</span> Social <span class="duenn">Cru</span>', text: "Reels, Social-Kampagnen, Short-Form-Storytelling, Paid Social." },
+  { id: "drone", vorschau: "t-drone", html: '<span class="duenn">The</span> Drone <span class="duenn">Cru</span>', text: "FPV- und Luftaufnahmen. Neue Perspektiven." },
+  { id: "design", vorschau: "t-design", html: '<span class="duenn">The</span> Design <span class="duenn">Cru</span>', text: "Illustration und Art Direction, von Hand gezeichnet." },
+];
 ---
-<Base
-  title="THE CRU"
-  description="THE CRU ist ein unabhängiges Filmstudio aus der Zentralschweiz. Dokumentarfilme, Branded Documentaries, Commercial und Social."
-  overFilm
->
-  <script type="application/ld+json" set:html={JSON.stringify(organization)} />
-  <Hero />
-  <section class="cru-chapters" id="projekte" aria-labelledby="projekte-titel">
-    <div class="cru-chapters__head">
-      <h2 class="cru-voices__title" id="projekte-titel">Drei Geschichten</h2>
-      <p class="cru-chapters__lead">Menschen an einem Wendepunkt, begleitet über Monate. Das ist die Arbeit, für die wir das Studio gegründet haben.</p>
+<Seite title="THE CRU" description="Werbevideos, Imagefilme und Dokumentarfilme aus der Zentralschweiz. Mit Menschen im Mittelpunkt, erzählt so, dass es berührt.">
+  <section class="block ton-nacht hero" data-ton="nacht" data-scroll aria-label="Showreel">
+    <div class="film t-reel" aria-hidden="true" data-hintergrund><div class="film__vignette"></div></div>
+    <div class="hero__schatten"></div>
+    <div class="hero__inhalt">
+      <h1 class="claim" aria-label="Story First. Emotion Always."><span><span>Story</span></span><span><span>First.</span></span><span class="duenn"><span>Emotion Always.</span></span></h1>
+      <div class="hero__leiste">
+        <p class="hero__unter">Werbevideos, Imagefilme und Dokumentarfilme aus der Zentralschweiz. Mit Menschen im Mittelpunkt, erzählt so, dass es berührt.</p>
+        <button class="pille pille--creme" type="button" data-oeffnet="Showreel" data-ton-film="t-reel"><span class="rec" aria-hidden="true"></span>Showreel ansehen</button>
+      </div>
     </div>
-    {homeProjekte.map((p) => <ProjectChapter projekt={p} />)}
   </section>
-  <Haltung />
-  <ServiceList />
-  <Team />
-  <Kunden />
-  <Testimonials />
-  <ContactRoutes />
-</Base>
+
+  <section class="block ton-creme haltung" data-ton="creme" data-scroll data-woerter aria-label="Haltung">
+    <p class="haltung__satz" id="haltung-satz">Wir zeigen Menschen. Wir wecken Gefühle. <span class="glut-teil">Dann wirkt die Botschaft.</span></p>
+    <div class="haltung__fuss">
+      <button class="filmlink intro-film" type="button" data-oeffnet="Das sind wir" data-ton-film="t-person" aria-label="Vorstellungsvideo ansehen">
+        <div class="film t-person"><div class="film__vignette"></div><span class="platz">[Vorstellungsvideo]</span></div>
+        <span class="spielknopf" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 1.5l11 6.5-11 6.5z" /></svg></span>
+      </button>
+      <div>
+        <p>THE CRU ist ein unabhängiges Filmstudio aus der Zentralschweiz. Ob Werbevideo, Imagefilm oder Dokumentarfilm: Wir stellen die Menschen hinter deiner Marke in den Fokus und holen dein Publikum dort ab, wo Entscheidungen fallen, im Gefühl.</p>
+        <a class="pille pille--nacht" href={url("ueber-uns/")}>Über uns <Pfeil /></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block ton-nacht projekte" data-ton="nacht" aria-labelledby="projekte-titel">
+    <div class="kopfzeile">
+      <h2 data-reveal class="mega" id="projekte-titel">Drei Geschichten</h2>
+      <p class="leise">Menschen an einem Wendepunkt, begleitet über Monate. Das ist die Arbeit, für die wir das Studio gegründet haben.</p>
+    </div>
+    <article class="janik" data-scroll data-aufziehen>
+      <Film p={janik} />
+      <h3 class="janik__titel">{janik.titel}</h3>
+      <Info p={janik} klasse="janik__info" />
+    </article>
+    <div class="duo">
+      {duo.map((p) => (
+        <article class="lauf">
+          <Film p={p} />
+          <h3 class="lauf__titel">{p.anzeige ?? p.titel}</h3>
+          <Info p={p} />
+        </article>
+      ))}
+    </div>
+    <div class="mitte"><a class="pille pille--creme" href={url("projekte/")}>Alle Projekte <Pfeil /></a></div>
+  </section>
+
+  <section class="block ton-nacht kinetik" data-ton="nacht" aria-label="Story First. Emotion Always.">
+    <div class="lauf-band" data-lauf="-1" data-tempo="0.8" data-schraeg aria-hidden="true"><div class="lauf-band__spur">{[1, 2, 3, 4].map(() => <span>Story First</span>)}</div></div>
+    <div class="lauf-band lauf-band--duenn" data-lauf="1" data-tempo="0.8" data-schraeg aria-hidden="true"><div class="lauf-band__spur">{[1, 2, 3, 4].map(() => <span>Emotion Always</span>)}</div></div>
+  </section>
+
+  <section class="block ton-creme leistungen" data-ton="creme" aria-labelledby="leistungen-titel">
+    <h2 class="sr" id="leistungen-titel">Leistungen</h2>
+    <ul class="dienste">
+      {dienste.map((d) => (
+        <li class={`dienst${d.gross ? " dienst--gross" : ""}`} data-vorschau={d.vorschau}><a href={url(`leistungen/#${d.id}`)}><h3 set:html={d.html} /><p class="leise">{d.text}</p></a></li>
+      ))}
+    </ul>
+    <div class="mitte"><a class="pille pille--nacht" href={url("leistungen/")}>Mehr erfahren <Pfeil /></a></div>
+  </section>
+
+  <section class="block ton-nacht team" data-ton="nacht" aria-labelledby="team-titel">
+    <div class="kopfzeile kopfzeile--gespiegelt">
+      <h2 data-reveal class="mega" id="team-titel">Von Menschen für Menschen</h2>
+      <p class="leise">Zwei Filmemacher, kurze Wege, direkter Draht. Wer dreht, nimmt auch ab.</p>
+    </div>
+    <div class="gruender">
+      {team.slice(0, 2).map((t) => <Person {...t} />)}
+    </div>
+    <div class="mitte"><a class="pille pille--creme" href={url("ueber-uns/")}>Das ganze Team <Pfeil /></a></div>
+  </section>
+
+  <Kunden ton="nacht" />
+  <Faq ton="creme" />
+  <Kontakt ton="nacht" />
+</Seite>

@@ -1,0 +1,50 @@
+---
+import Pfeil from "./Pfeil.astro";
+import { company } from "../site";
+interface Props { ton?: "nacht" | "creme" }
+const { ton = "creme" } = Astro.props;
+const leistungen = [["werbung", "Werbevideo"], ["image", "Imagefilm"], ["doku", "Dokumentarfilm"], ["social", "Social Media"], ["drohne", "Drohnenaufnahmen"], ["design", "Design und Illustration"], ["anderes", "Etwas anderes"]];
+const maps = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${company.name}, ${company.street}, ${company.zip} ${company.city}`)}`;
+---
+<section class={`block ton-${ton} kontakt`} id="kontakt" data-ton={ton} aria-labelledby="kontakt-titel">
+  <h2 class="kontakt__titel" id="kontakt-titel" data-reveal>Let’s find your story</h2>
+  <div class="kontakt__raster">
+    <div class="wege-liste">
+      <p class="wege-liste__lead">Ruf an, schreib uns oder komm im Studio vorbei.</p>
+      <a class="weg-zeile" href={company.phoneHref}><span class="weg-zeile__art">Telefon</span><span class="weg-zeile__wert">{company.phone}</span><Pfeil /></a>
+      <a class="weg-zeile" href={`mailto:${company.email}`}><span class="weg-zeile__art">E-Mail</span><span class="weg-zeile__wert">{company.email}</span><Pfeil /></a>
+      <a class="weg-zeile" href={maps} target="_blank" rel="noopener"><span class="weg-zeile__art">Studio, in Google Maps öffnen</span><span class="weg-zeile__wert">{company.street}, {company.zip} {company.city}</span><Pfeil /></a>
+    </div>
+    <div class="karte-kontakt">
+      <p class="karte-kontakt__titel" id="form-titel">Schreib uns</p>
+      <div class="panel">
+        <form class="formular" novalidate data-formular data-an={company.email} aria-labelledby="form-titel">
+          <div class="feld-reihe">
+            <div class="feld"><label for="f-name">Vorname und Name</label><input id="f-name" name="name" type="text" autocomplete="name" required /></div>
+            <div class="feld"><label for="f-mail">E-Mail</label><input id="f-mail" name="email" type="email" autocomplete="email" inputmode="email" required /></div>
+          </div>
+          <div class="feld-reihe">
+            <div class="feld"><label for="f-tel">Telefon</label><input id="f-tel" name="telefon" type="tel" autocomplete="tel" inputmode="tel" /></div>
+            <div class="feld"><label for="f-web">Website</label><input id="f-web" name="website" type="url" inputmode="url" placeholder="https://" /></div>
+          </div>
+          <fieldset class="feld feld--chips"><legend>Leistung</legend><div class="chips">
+            {leistungen.map(([, t]) => <label class="chip"><input type="checkbox" name="leistung" value={t} /><span>{t}</span></label>)}
+          </div></fieldset>
+          <div class="feld"><label for="f-text">Worum geht es?</label><textarea id="f-text" name="nachricht" rows="4" required data-wachsen></textarea></div>
+          <div class="feld"><label for="f-ref">Weitere Referenzen</label><textarea id="f-ref" name="referenzen" rows="2" placeholder="Links zu Filmen, Moodboards oder Beispielen, die dir gefallen" data-wachsen></textarea></div>
+          <p class="formular__fehler" role="alert" hidden></p>
+          <div class="formular__fuss">
+            <button class="pille pille--creme" type="submit">Anfrage senden <Pfeil /></button>
+            <p class="formular__hinweis">Öffnet dein Mailprogramm mit der fertigen Nachricht.</p>
+          </div>
+        </form>
+        <div class="danke" hidden tabindex="-1">
+          <p class="danke__titel">Danke!</p>
+          <p>Deine Nachricht liegt in deinem Mailprogramm bereit. Schick sie dort ab, dann melden wir uns bei dir.</p>
+          <p class="formular__hinweis">Kein Mailprogramm? Schreib direkt an {company.email}.</p>
+          <button class="pille pille--leise" type="button" data-nochmal>Neue Anfrage</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
